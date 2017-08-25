@@ -1,0 +1,21 @@
+<tr>
+    <td>{{star}}</td>
+    <td>{{category}}</td>
+    <td>{{date}}</td>
+    <td>{{location}}</td>
+    <td>{{price}}</td>
+    <td>{{currency}}</td>
+    <td>{{tickets}}</td>
+    <td>{{description}}</td>
+    <td>
+        {{#if isAdmin}}
+            <a href="#/delete/:{{_id}}">[Delete]</a>
+            <hr>
+            <a href="#/edit/:{{_id}}">[Edit]</a>
+        {{else}}
+            <hr>
+            <a href="#/buy/:{{_id}}">[Buy]</a>
+            <hr>
+        {{/if}}
+    </td>
+</tr>

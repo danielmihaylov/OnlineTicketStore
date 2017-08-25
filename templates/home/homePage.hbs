@@ -1,0 +1,24 @@
+{{>header}}
+<section id="main">
+    <section id="viewHome">
+        {{>slider}}
+        <section id="viewEventsImages">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <section id="viewLeftSidebar">
+                            <h2>Events Category</h2>
+                            {{>categories}}
+                            {{>locations}}
+                        </section>
+                    </div>
+                    <div class="col-sm-9 padding-right">
+                        {{>eventsNear}}
+                        {{>categoryTab}}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+</section>
+{{>footerPomelo}}
