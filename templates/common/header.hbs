@@ -1,0 +1,67 @@
+<header id="header">
+    <section class="header-middle">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="logo pull-left">
+                        <a href="#/home"><img src="images/logo.jpg"/></a>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="shop-menu pull-right">
+                        <ul class="navbar-nav nav">
+                            <li>
+                                <a href="https://trello.com/b/dfRKkNc8/onlineticketstore" target="_blank">
+                                    <img src="images/trello.jpg"/>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/danielmihaylov/OnlineTicketStore" target="_blank">
+                                <img src="images/github.jpg"/>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="header-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-9">
+                    <div id="menu" class="mainmenu pull-left">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#/home" id="linkHome" class="active"><i class="fa fa-home"></i>Home</a></li>
+                            <li><a href="#/eventsList" id="linkEvents"><i class="fa fa-star"></i>Events</a></li>
+                            {{#if isUser}}
+                                <li><a href="#/myAccount" id="linkAccount"><i class="fa fa-info"></i>My Account</a></li>
+                                <li><a href="#/cart" id="linkCart"><i class="fa fa-shopping-cart"></i>Cart</a></li>
+                                <li><a href="#/logout" id="linkLogout"><i class="fa fa-sign-out"></i>Logout</a></li>
+                            {{else if isAdmin}}
+                                <li><a href="#/addEvent" id="linkCreate"><i class="fa fa-plus"></i>Add</a></li>
+                                <li><a href="#/editEvent" id="linkEdit"><i class="fa fa-cog"></i>Edit</a></li>
+                                <li><a href="#/logout" id="linkLogout"><i class="fa fa-sign-out"></i>Logout</a></li>
+                            {{else}}
+                                <li><a href="#/login" id="linkLogin"><i class="fa fa-lock"></i>Login</a></li>
+                                <li><a href="#/register" id="linkRegister"><i class="fa fa-user"></i>Register</a></li>
+                            {{/if}}
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div id="usernameId" class="pull-right">
+                        {{#if isUser}}
+                            <span id="loggedInUser">Welcome, {{username}}!</span>
+                        {{else if isAdmin}}
+                            <span id="loggedInUser">Welcome, Admin!</span>
+                        {{else}}
+                            <span id="loggedInUser">Welcome, Stranger!</span>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</header>

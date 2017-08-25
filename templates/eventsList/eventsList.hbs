@@ -1,0 +1,33 @@
+{{>header}}
+<section id="main">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <section id="viewEvents">
+                    <h2><i class="fa fa-star"></i> EVENTS LIST</h2>
+                    <hr>
+
+                    <div id="events">
+                        <table>
+                            <tr>
+                                <th>Event</th>
+                                <th>Category</th>
+                                <th>Date</th>
+                                <th>Location</th>
+                                <th>Price</th>
+                                <th>Currency</th>
+                                <th>Tickets</th>
+                                <th>Description</th>
+                                <th>Action</th>
+                            </tr>
+                            {{#each events}}
+                                {{>event}}
+                            {{/each}}
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</section>
+{{>footer}}

@@ -1,0 +1,57 @@
+<form action="#/edit/:{{_id}}" method="post" id="formEditEvent" class="eventForms">
+    <br>
+
+    <div><input type="hidden" name="id" required/></div>
+    <h4>Event Star:</h4>
+
+    <div><input type="text" name="star" value="{{star}}" required></div>
+    <br>
+    <h4>Category:</h4>
+
+    <div>
+        <select name="category">
+            <option>{{category}}</option>
+            <option>Concert</option>
+            <option>Special Event</option>
+            <option>Theater</option>
+            <option>Sport Event</option>
+        </select>
+    </div>
+    <br>
+    <h4>Date:</h4>
+
+    <div><input type="date" name="date" value="{{date}}" required></div>
+    <br>
+    <h4>Location:</h4>
+
+    <div><input type="text" name="location" value="{{location}}" required></div>
+    <br>
+    <h4>Price:</h4>
+
+    <div><input type="number" name="price" value="{{price}}" required></div>
+    <br>
+    <h4>Currency:</h4>
+
+    <div>
+        <select name="currency">
+            <option>{{currency}}</option>
+            <option>lv. (BG leva)</option>
+            <option>€ (Euro)</option>
+            <option>Ƀ (Bitcoin)</option>
+            <option>$ (US dollar)</option>
+            <option>£ (GB pound)</option>
+        </select>
+    </div>
+    <br>
+    <h4>Available Tickets:</h4>
+
+    <div><input type="number" name="tickets" value="{{tickets}}" required></div>
+    <br>
+    <h4>Description:</h4>
+
+    <div><textarea name="description" rows="5" required>{{description}}</textarea></div>
+    <br>
+
+    <div><input type="submit" id="buttonEditEvent" class="get" value="Edit Event"></div>
+
+</form>
