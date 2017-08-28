@@ -43,6 +43,9 @@ $(()=>{
 
         //deleteEvent by Daniel
         this.get('#/delete/:eventId',handlers.eventDeleteAction);
+
+        this.get('#/create',handlers.createEvent);
+        this.post('#/create',handlers.createEventAction);
     });
 
     app.run();

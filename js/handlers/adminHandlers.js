@@ -54,3 +54,33 @@ handlers.eventDeleteAction = function (ctx) {
             ctx.redirect('#/home');
         }).catch(handleError);
 };
+
+//call create event page
+handlers.createEvent = function () {
+    this.loadPartials({
+        header:'./templates/common/header.hbs',
+        footer:'./templates/common/footer.hbs',
+        createEventForm :'./templates/eventsCreate/eventCreateForm.hbs'
+    }).then(function () {
+        this.partial('./templates/eventsCreate/eventCreateView.hbs');
+    })
+};
+
+//Create the event - post data from the create event page to Kinvey
+handlers.createEventAction = function (ctx) {
+    let newEvent = {
+        star: ctx.params.star,
+        category: ctx.params.category,
+        date: ctx.params.date,
+        location: ctx.params.location,
+        price: ctx.params.price,
+        currency: ctx.params.currency,
+        tickets: ctx.params.tickets,
+        description: ctx.params.description
+    };
+
+    eventService.createEvent(newEvent)
+        .then(function () {
+            ctx.redirect('#/eventsList');
+        })
+};

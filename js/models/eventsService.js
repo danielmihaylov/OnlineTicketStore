@@ -17,10 +17,15 @@ let eventService = (() => {
         return requester.remove('appdata',`ticket-store/${eventId}`, 'kinvey');
     }
 
+    function createEvent(newEvent) {
+        return requester.post('appdata','ticket-store','',newEvent);
+    }
+
     return {
         getAllEvents,
         getEvent,
         updateEvent,
-        deleteEvent
+        deleteEvent,
+        createEvent
     }
 })();
