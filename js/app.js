@@ -41,7 +41,8 @@ $(()=>{
         this.get('#/edit/:eventId',handlers.eventEdit);
         this.post('#/edit/:eventId',handlers.eventEditAction);
 
-
+        //deleteEvent by Daniel
+        this.get('#/delete/:eventId',handlers.eventDeleteAction);
     });
 
     app.run();

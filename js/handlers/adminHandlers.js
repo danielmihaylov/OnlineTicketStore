@@ -41,6 +41,16 @@ handlers.eventEditAction = function (ctx) {
 
     eventService.updateEvent(eventId,editedEvent)
         .then(function () {
-            ctx.redirect('#/home');
+            ctx.redirect('#/eventsList');
         })
+};
+
+//deleteEvent by Daniel
+handlers.eventDeleteAction = function (ctx) {
+    let eventId = ctx.params.eventId.slice(1);
+
+    eventService.deleteEvent(eventId)
+        .then(function () {
+            ctx.redirect('#/home');
+        }).catch(handleError);
 };

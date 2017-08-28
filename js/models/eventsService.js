@@ -12,9 +12,15 @@ let eventService = (() => {
         return requester.update('appdata',`ticket-store/${eventId}`,'',eventData);
     }
 
+    //deleteEvent by Daniel
+    function deleteEvent() {
+        return requester.remove('appdata',`ticket-store/${eventId}`, 'kinvey');
+    }
+
     return {
         getAllEvents,
         getEvent,
-        updateEvent
+        updateEvent,
+        deleteEvent
     }
 })();
