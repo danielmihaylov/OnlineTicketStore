@@ -115,3 +115,25 @@ handlers.eventsList = function (ctx) {
             auth.handleError(reason);
         })
 };
+
+//Not working
+//
+// handlers.myAccount = function (ctx) {
+//     let userId = ctx.params.id.slice(1);
+//
+//     eventService.getUser(userId)
+//         .then(function (userInfo) {
+//             ctx.username = sessionStorage.getItem('username');
+//             ctx.userId = userId;
+//             ctx.name = userInfo.name;
+//             ctx.firstName = userInfo.firstName === sessionStorage.getItem('firstName');
+//             ctx.lastName = userInfo.lastName === sessionStorage.getItem('lastName');
+//             ctx.email = userInfo.email === sessionStorage.getItem('email');
+//             ctx.loadPartials({
+//                 header: './templates/common/header.hbs',
+//                 footer: './templates/common/footer.hbs',
+//             }).then(function () {
+//                 this.partial('./templates/myAccount/myAccountView.hbs');
+//             })
+//         })
+// };

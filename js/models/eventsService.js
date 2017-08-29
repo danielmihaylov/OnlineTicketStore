@@ -21,11 +21,17 @@ let eventService = (() => {
         return requester.post('appdata','ticket-store','',newEvent);
     }
 
+    //Not Working
+    // function getUser(userId) {
+    //     return requester.get('appdata', `users/${userId}`, 'kinvey');
+    // }
+
     return {
         getAllEvents,
         getEvent,
         updateEvent,
         deleteEvent,
-        createEvent
+        createEvent,
+        //getUser
     }
 })();
