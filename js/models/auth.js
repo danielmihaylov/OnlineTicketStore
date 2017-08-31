@@ -58,6 +58,7 @@ let auth = (() => {
         } else {
             ctx.isAdmin = false;
             ctx.isUser = false;
+            ctx.isUnlogged = true;
         }
     }
 

@@ -92,13 +92,21 @@ handlers.cart = function () {
 
 handlers.eventsList = function (ctx) {
     auth.loginStatusCheck(ctx);
-    eventService.getAllEvents()
+    let authentication = '';
+    if (ctx.isUnlogged) {
+        authentication = 'basic';
+    }
+    eventService.getAllEvents(authentication)
         .then(function (data) {
             ctx.events = data;
 
             if(ctx.isAdmin) {
                 for (let obj of ctx.events) {
                     obj.isAdmin=true;
+                }
+            }else if(ctx.isUnlogged) {
+                for (let obj of ctx.events) {
+                    obj.isUnloggedn=true;
                 }
             }
 

@@ -1,7 +1,12 @@
 let eventService = (() => {
 
-    function getAllEvents() {
-        return requester.get('appdata', 'ticket-store', '');
+    function getAllEvents(authentication) {
+        if (authentication === 'basic') {
+            return requester.get('appdata', 'ticket-store', 'basic', 'guest');
+        } else {
+            return requester.get('appdata', 'ticket-store', '');
+        }
+
     }
 
     function getEvent(eventId) {
