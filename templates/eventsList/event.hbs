@@ -1,12 +1,9 @@
 <tr>
-    <td>{{star}}</td>
+    <td>{{star}}<br><a href="#/eventDetails/:{{_id}}">[Details]</a></td>
     <td>{{category}}</td>
     <td>{{date}}</td>
     <td>{{location}}</td>
-    <td>{{price}}</td>
-    <td>{{currency}}</td>
-    <td>{{tickets}}</td>
-    <td>{{description}}</td>
+    <td>{{price}} {{currency}}</td>
     <td>
         {{#if isAdmin}}
             <a href="#/delete/:{{_id}}">[Delete]</a>

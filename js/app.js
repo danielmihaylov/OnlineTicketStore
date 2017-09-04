@@ -37,6 +37,7 @@ $(()=>{
         this.get('#/cart',handlers.cart);
 
         this.get('#/eventsList',handlers.eventsList);
+        this.get('#/eventDetails/:eventId', handlers.eventDetails);
 
         this.get('#/edit/:eventId',handlers.eventEdit);
         this.post('#/edit/:eventId',handlers.eventEditAction);

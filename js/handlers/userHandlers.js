@@ -124,6 +124,28 @@ handlers.eventsList = function (ctx) {
         })
 };
 
+handlers.eventDetails = function (ctx) {
+    let eventId = ctx.params.eventId.slice(1);
+    let authentication = '';
+    auth.loginStatusCheck(ctx);
+    if (ctx.isUnlogged) {
+        authentication = 'basic';
+
+    }
+    eventService.getEvent(eventId, authentication)
+        .then(function (data) {
+            ctx.event = data;
+            ctx.loadPartials({
+                header: './templates/common/header.hbs',
+                footer: './templates/common/footer.hbs',
+            }).then(function () {
+                ctx.partials = this.partials;
+                ctx.partial('./templates/eventDetails/eventDetails.hbs');
+            });
+        });
+
+};
+
 //Not working
 //
 // handlers.myAccount = function (ctx) {
