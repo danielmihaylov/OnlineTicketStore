@@ -106,7 +106,7 @@ handlers.eventsList = function (ctx) {
                 }
             }else if(ctx.isUnlogged) {
                 for (let obj of ctx.events) {
-                    obj.isUnloggedn=true;
+                    obj.isUnlogged=true;
                 }
             }
 
@@ -125,6 +125,7 @@ handlers.eventsList = function (ctx) {
 };
 
 handlers.eventDetails = function (ctx) {
+
     let eventId = ctx.params.eventId.slice(1);
     let authentication = '';
     auth.loginStatusCheck(ctx);
