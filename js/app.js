@@ -39,6 +39,11 @@ $(()=>{
         this.get('#/eventsList',handlers.eventsList);
         this.get('#/eventDetails/:eventId', handlers.eventDetails);
 
+        this.get('#/concerts', handlers.concerts);
+        this.get('#/specialEvents', handlers.specialEvents);
+        this.get('#/theater', handlers.theater);
+        this.get('#/sportEvents', handlers.sportEvents);
+
         this.get('#/edit/:eventId',handlers.eventEdit);
         this.post('#/edit/:eventId',handlers.eventEditAction);
 
