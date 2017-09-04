@@ -211,6 +211,87 @@ handlers.eventsListByCategory = function (ctx, searchedCategory) {
         });
 };
 
+handlers.eventsOfBulgaria = function (ctx) {
+    let country = 'Bulgaria';
+    handlers.eventListByCountry(ctx, country);
+};
+
+handlers.eventsOfGermany = function (ctx) {
+    let country = 'Germany';
+    handlers.eventListByCountry(ctx, country);
+};
+
+handlers.eventsOfUK = function (ctx) {
+    let country = 'UK';
+    handlers.eventListByCountry(ctx, country);
+};
+
+handlers.eventsOfRussia = function (ctx) {
+    let country = 'Russia';
+    handlers.eventListByCountry(ctx, country);
+};
+
+handlers.eventsOfSpain = function (ctx) {
+    let country = 'Spain';
+    handlers.eventListByCountry(ctx, country);
+};
+
+handlers.eventsOfChina = function (ctx) {
+    let country = 'China';
+    handlers.eventListByCountry(ctx, country);
+};
+
+handlers.eventsOfUSA = function (ctx) {
+    let country = 'USA';
+    handlers.eventListByCountry(ctx, country);
+};
+
+handlers.eventListByCountry = function (ctx, searchedCountry) {
+    auth.loginStatusCheck(ctx);
+    let authentication = '';
+    if (ctx.isUnlogged) {
+        authentication = 'basic';
+    }
+    eventService.getAllEvents(authentication)
+        .then(function (data) {
+            ctx.events = data;
+            ctx.thereIsEventsOfTheSameCountry = false;
+            for (let obj of ctx.events) {
+                if (obj.country === searchedCountry) {
+                    obj.inSameCountry = true;
+                    ctx.thereIsEventsOfTheSameCoutry = true;
+                }else{
+                    obj.inSameCountry = false;
+                }
+
+            }
+
+            if(ctx.isAdmin) {
+                for (let obj of ctx.events) {
+                    obj.isAdmin=true;
+                }
+            }else if(ctx.isUnlogged) {
+                for (let obj of ctx.events) {
+                    obj.isUnlogged=true;
+                }
+            }
+
+            ctx.country = searchedCountry;
+
+            ctx.loadPartials({
+                header: './templates/common/header.hbs',
+                footer: './templates/common/footer.hbs',
+                event: './templates/eventsList/eventByCountry.hbs'
+            }).then(function () {
+                ctx.partials = this.partials;
+                ctx.partial('./templates/eventsList/eventListByCountry.hbs');
+            })
+        })
+        .catch(function (reason) {
+            auth.handleError(reason);
+        });
+};
+
 
 //Not working
 //

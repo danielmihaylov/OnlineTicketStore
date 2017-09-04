@@ -44,6 +44,14 @@ $(()=>{
         this.get('#/theater', handlers.theater);
         this.get('#/sportEvents', handlers.sportEvents);
 
+        this.get('#/bulgaria', handlers.eventsOfBulgaria);
+        this.get('#/uk', handlers.eventsOfUK);
+        this.get('#/germany', handlers.eventsOfGermany);
+        this.get('#/russia', handlers.eventsOfRussia);
+        this.get('#/spain', handlers.eventsOfSpain);
+        this.get('#/china', handlers.eventsOfChina);
+        this.get('#/usa', handlers.eventsOfUSA);
+
         this.get('#/edit/:eventId',handlers.eventEdit);
         this.post('#/edit/:eventId',handlers.eventEditAction);
 
