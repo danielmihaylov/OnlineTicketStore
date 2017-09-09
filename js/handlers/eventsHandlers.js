@@ -381,7 +381,25 @@ handlers.eventListByPrice = function (ctx, searchedPrice) {
             ctx.thereIsEventsOfTheSamePrice = false;
             for (let obj of ctx.events) {
                 let price = Number(obj.price);
-                if (price < searchedPrice[1] && price > searchedPrice[0]) {
+                if(price !== 0) {
+                    switch(obj.currency){
+                        case "£ (GB pound)":
+                            price *= 2.15;
+                            break;
+                        case "Ƀ (Bitcoin)":
+                            price *= 6889.58;
+                            break;
+                        case "$ (US dollar)":
+                            price *= 1.63;
+                            break;
+                        case "€ (Euro)":
+                            price *= 1.96;
+                            break;
+                    }
+                }
+
+
+                if (price < searchedPrice[1] && price >= searchedPrice[0]) {
                     obj.inSamePrice = true;
                     ctx.thereIsEventsOfTheSamePrice = true;
                 }else{
