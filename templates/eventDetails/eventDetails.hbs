@@ -1,41 +1,41 @@
-{{>header}}
-    <h1>Event: {{event.star}}</h1>
-<br>
-    <h2>Category: {{event.category}}</h2>
-<br>
-    <h2><i>Date: {{event.date}}</i></h2>
-<br>
-    <h3>Location: {{event.location}}</h3>
-<br>
-    <h2>Price: {{event.price}} {{event.currency}}</h2>
-<br>
-    <h4>Discription:</h4>
-    <h5>{{event.description}}</h5>
-<br>
-    <td>
-        {{#if isAdmin}}
-            <a href="#/delete/:{{_id}}">[Delete]</a>
-            <hr>
-            <a href="#/edit/:{{_id}}">[Edit]</a>
-        {{/if}}
 
-{{#if event.availabality}}
-    {{#if isUser}}
-        <h4>Price:</h4>
+        {{>header}}
+<section>
+        <div class="w3-padding-64 w3-center w3-white">
+                <div class="w3-half w3-section">
+                    <ul class="w3-ul w3-card-2 w3-hover-shadow">
+                        <li class="w3-red w3-xlarge w3-padding-32">{{event.star}}</li>
+                        <li class="w3-padding-16">Category: <b>{{event.category}}</b></li>
+                        <li class="w3-padding-16">Date: <b>{{event.date}}</b></li>
+                        <li class="w3-padding-16">Location: <b>{{event.location}}</b></li>
+                        <li class="w3-padding-16">Description: <b>{{event.description}}</b></li>
+                        <li class="w3-padding-16">Price: <b>{{event.price}} {{event.currency}}</b></li>
+                        {{#if isAdmin}}
+                            <button class="w3-button w3-black w3-padding-large"><a href="#/delete/:{{_id}}">[Delete]</a></button>
+                            <hr>
+                            <button class="w3-button w3-black w3-padding-large"><a href="#/edit/:{{_id}}">[Edit]</a></button>
+                        {{/if}}
+                        {{#if event.availabality}}
+                            {{#if isUser}}
+                                <h4>Price:</h4>
 
-        <div><input type="number" name="price" required></div>
-        <hr>
-        <a href="#/buy/:{{_id}}">[Buy]</a>
-        <hr>
-    {{/if}}
-    {{#if isUnlogged}}
-        <h3>If you want to buy tickets, have to log in: <a href="#/login" id="linkLogin"><i class="fa fa-lock"></i>Login</a> or register un account: <a href="#/register" id="linkRegister"><i class="fa fa-user"></i>Register</a></h3>
-    {{/if}}
-    <br>
-    <h3>There are {{event.tickets}} tickets</h3>
-{{else}}
-    <h3>Sorry, the tickets are sold. You can view other events: <a href="#/eventsList" id="linkEvents"><i class="fa fa-star"></i>Events</a></h3>
-{{/if}}
-        <br>
-        <br>
-{{>footer}}
+                                <div><input type="number" name="price" required></div>
+                                <hr>
+                                <a href="#/buy/:{{_id}}">[Buy]</a>
+                                <hr>
+                            {{/if}}
+                            {{#if isUnlogged}}
+                                <li class="w3-padding-16"><b>If you want to buy tickets, have to log in: <a href="#/login" id="linkLogin"><i class="fa fa-lock"></i>Login</a> or register un account: <a href="#/register" id="linkRegister"><i class="fa fa-user"></i>Register</a></b></li>
+                            {{/if}}
+                            <br>
+                            <li class="w3-padding-16"><b>There are {{event.tickets}} tickets</b></li>
+                        {{else}}
+                            <li class="w3-padding-16"><b>Sorry, the tickets are sold. You can view other events: <a href="#/eventsList" id="linkEvents"><i class="fa fa-star"></i>Events</a></b></li>
+                        {{/if}}
+
+                    </ul><br><br><br>
+
+                </div>
+            </div>
+</section>
+        {{>footer}}
