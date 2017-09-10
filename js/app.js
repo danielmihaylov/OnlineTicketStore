@@ -109,6 +109,9 @@ $(()=>{
 
         this.get('#/create',handlers.createEvent);
         this.post('#/create',handlers.createEventAction);
+
+        //call venue list
+        this.get('#/venuesList',handlers.venuesList);
     });
 
     app.run();
