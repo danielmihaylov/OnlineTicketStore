@@ -7,13 +7,16 @@ handlers.eventEdit = function (ctx) {
         .then(function (data) {
             ctx._id = data._id;
             ctx.star = data.star;
+            ctx.name = data.name;
             ctx.category = data.category;
             ctx.date = data.date;
             ctx.location = data.location;
+            ctx.country = data.country;
             ctx.price = data.price;
             ctx.currency = data.currency;
             ctx.tickets = data.tickets;
             ctx.description = data.description;
+            ctx.image = data.image;
 
             ctx.loadPartials({
                 header: './templates/common/header.hbs',
@@ -30,15 +33,22 @@ handlers.eventEditAction = function (ctx) {
     let eventId = ctx.params.eventId.slice(1);
     let editedEvent = {
         star: ctx.params.star,
+        name: ctx.params.name,
         category: ctx.params.category,
         date: ctx.params.date,
         location: ctx.params.location,
+        country: ctx.params.country,
         price: ctx.params.price,
         currency: ctx.params.currency,
         tickets: ctx.params.tickets,
-        description: ctx.params.description
+        description: ctx.params.description,
+        image: ctx.params.image
     };
-
+    if (Number(editedEvent.tickets) > 0) {
+        editedEvent.availabality = true;
+    } else {
+        editedEvent.availabality = false;
+    }
     eventService.updateEvent(eventId,editedEvent)
         .then(function () {
             ctx.redirect('#/eventsList');
