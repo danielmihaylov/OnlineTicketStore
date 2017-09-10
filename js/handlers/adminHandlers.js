@@ -70,14 +70,23 @@ handlers.createEvent = function () {
 handlers.createEventAction = function (ctx) {
     let newEvent = {
         star: ctx.params.star,
+        name: ctx.params.name,
         category: ctx.params.category,
         date: ctx.params.date,
+        country: ctx.params.country,
         location: ctx.params.location,
         price: ctx.params.price,
         currency: ctx.params.currency,
         tickets: ctx.params.tickets,
-        description: ctx.params.description
+        description: ctx.params.description,
+        image: 'images/' + ctx.params.image
     };
+
+    if (Number(newEvent.tickets) > 0) {
+        newEvent.availabality = true;
+    } else {
+        newEvent.availabality = false;
+    }
 
     eventService.createEvent(newEvent)
         .then(function () {
