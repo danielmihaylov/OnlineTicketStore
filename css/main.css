@@ -1624,6 +1624,16 @@ h2.title {
   margin: 17% 23% 0 17%;
 }
 
+#viewEventDetails {
+  width: 100%;
+  background: #f9f9f9;
+  padding: 0 30px 30px 30px;
+  border-radius: 20px;
+  box-shadow: 2px 2px 2px #888888;
+  margin-top: 30px;
+  margin-bottom: 5%;
+}
+
 #formEditEvent, #formCreateEvent {
   width: 100%;
   background: #f9f9f9;
@@ -1680,4 +1690,59 @@ h2.title {
 
 #viewEdit > h2 {
   color: #0376C0;
+}
+/* css for the venues*/
+.post {
+  overflow: auto;
+  border: 3px solid #2d4f61;
+  border-radius: 10px;
+  background: #FFFFFF;
+  margin: 15px;
+  position: relative;
+}
+
+.col {
+  float: left;
+  display: inline-block;
+  vertical-align: top;
+  min-height: 100px;
+  padding: 2px;
+  background: #FE980F;
+}
+
+.thumbnail {
+  margin: 10px;
+  width: 200px;
+  height: 200px;
+  text-align: center;
+}
+
+.content {
+  display: block;
+  vertical-align: top;
+}
+
+.details {
+  margin-top: 10px;
+}
+
+.info {
+  color: #999999;
+}
+
+.venue-controls{
+  position: absolute;
+  left: 220px;
+  bottom: 10px;
+}
+
+.venue-controls-admin{
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+}
+
+.controls .action {
+  display: inline-block;
+  text-decoration: none;
 }
