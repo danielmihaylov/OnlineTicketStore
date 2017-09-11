@@ -1701,6 +1701,11 @@ h2.title {
   position: relative;
 }
 
+.post p {
+  padding-bottom: 35px;
+  margin: 10px;
+}
+
 .col {
   float: left;
   display: inline-block;

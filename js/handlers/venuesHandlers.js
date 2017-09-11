@@ -8,6 +8,9 @@ handlers.venuesList = function (ctx) {
     venueService.getVenues(authorization)
         .then(function (data) {
             ctx.venues = data;
+            for (let venue of ctx.venues) {
+                venue.isAdmin=ctx.isAdmin;
+            }
 
             ctx.loadPartials({
                 header: './templates/common/header.hbs',
