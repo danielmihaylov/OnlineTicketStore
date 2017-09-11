@@ -25,11 +25,18 @@ let venueService = (() => {
         return requester.remove('appdata',`venues/${venueId}`, '');
     }
 
+    function compareVenues (a,b) {
+        if (a.name > b.name) return 1;
+        if (a.name < b.name) return -1;
+        return 0;
+    }
+
     return {
         getVenues,
         createVenue,
         getVenue,
         updateVenue,
-        deleteVenue
+        deleteVenue,
+        compareVenues
     }
 })();
