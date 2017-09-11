@@ -13,8 +13,18 @@ let venueService = (() => {
         return requester.post('appdata', 'venues', '', newVenue);
     }
 
+    function getVenue(venueId) {
+        return requester.get('appdata', `venues/${venueId}`, '');
+    }
+
+    function updateVenue(venueId, venueData) {
+        return requester.update('appdata',`venues/${venueId}`,'',venueData);
+    }
+
     return {
         getVenues,
-        createVenue
+        createVenue,
+        getVenue,
+        updateVenue
     }
 })();

@@ -116,3 +116,56 @@ handlers.createVenueAction = function (ctx) {
             ctx.redirect('#/venuesList');
         })
 };
+
+//Call edit venue page and fill in the form with the existing data
+handlers.editVenue = function (ctx) {
+    auth.loginStatusCheck(ctx);
+    if(!ctx.isAdmin){
+        messenger.showError('Unauthorized');
+        ctx.redirect('#/home');
+    }else{
+        let venueId = ctx.params.venueId.slice(1);
+        venueService.getVenue(venueId)
+            .then(function (data) {
+                ctx._id=data._id;
+                ctx.name = data.name;
+                ctx.location = data.location;
+                ctx.image = data.image;
+                ctx.description = data.description;
+
+                ctx.loadPartials({
+                    header: './templates/common/header.hbs',
+                    footer: './templates/common/footer.hbs',
+                    editVenueForm: './templates/venueEdit/editVenueForm.hbs'
+                }).then(function () {
+                    ctx.partials=this.partials;
+                    ctx.partial('./templates/venueEdit/editVenuePage.hbs');
+                })
+            })
+    }
+};
+
+
+//Edit the venue in the backend
+handlers.editVenueAction = function (ctx) {
+    auth.loginStatusCheck(ctx);
+    if(!ctx.isAdmin){
+        messenger.showError('Unauthorized');
+        ctx.redirect('#/home');
+    }else{
+        let venueId = ctx.params.venueId.slice(1);
+        console.log(venueId);
+        let editedVenue = {
+            location:ctx.params.location,
+            image:ctx.params.image,
+            name:ctx.params.name,
+            description:ctx.params.description
+        };
+
+        venueService.updateVenue(venueId,editedVenue)
+            .then(function () {
+                ctx.redirect('#/venuesList');
+            })
+    }
+};
+

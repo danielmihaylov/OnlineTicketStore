@@ -116,6 +116,10 @@ $(()=>{
         //create venue
         this.get('#/createVenue',handlers.createVenue);
         this.post('#/createVenue',handlers.createVenueAction);
+
+        //edit venue
+        this.get('#/editVenue/:venueId',handlers.editVenue);
+        this.post('#/editVenue/:venueId',handlers.editVenueAction);
     });
 
     app.run();

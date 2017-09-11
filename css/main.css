@@ -1634,7 +1634,7 @@ h2.title {
   margin-bottom: 5%;
 }
 
-#formEditEvent, #formCreateEvent, #formCreateVenue {
+#formEditEvent, #formCreateEvent, #formCreateVenue, #formEditVenue {
   width: 100%;
   background: #f9f9f9;
   padding: 0 30px 30px 30px;
@@ -1644,11 +1644,11 @@ h2.title {
   margin-bottom: 5%;
 }
 
-#formCreateVenue input{
+#formCreateVenue input,#formEditVenue input{
   width: 100%;
 }
 
-#formCreateVenue input.get{
+#formCreateVenue input.get, #formEditVenue input.get{
   width: auto;
 }
 
