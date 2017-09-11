@@ -84,3 +84,35 @@ handlers.createEventAction = function (ctx) {
             ctx.redirect('#/eventsList');
         })
 };
+
+//Create a venue - call create event page
+handlers.createVenue = function () {
+    auth.loginStatusCheck(this);
+    if (!this.isAdmin) {
+        messenger.showError('Unauthorized');
+        this.redirect('#/home');
+    } else {
+        this.loadPartials({
+            header: './templates/common/header.hbs',
+            footer: './templates/common/footer.hbs',
+            createVenueForm: './templates/venueCreate/createVenueForm.hbs'
+        }).then(function () {
+            this.partial('./templates/venueCreate/createVenueView.hbs');
+        })
+    }
+};
+
+//Execute create event action
+handlers.createVenueAction = function (ctx) {
+    let newVenue = {
+        location: ctx.params.location,
+        image: ctx.params.image,
+        name: ctx.params.name,
+        description: ctx.params.description
+    };
+
+    venueService.createVenue(newVenue)
+        .then(function () {
+            ctx.redirect('#/venuesList');
+        })
+};

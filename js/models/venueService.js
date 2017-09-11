@@ -8,7 +8,13 @@ let venueService = (() => {
         }
     }
 
+
+    function createVenue(newVenue) {
+        return requester.post('appdata', 'venues', '', newVenue);
+    }
+
     return {
-        getVenues
+        getVenues,
+        createVenue
     }
 })();

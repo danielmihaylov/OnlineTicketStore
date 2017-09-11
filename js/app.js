@@ -112,6 +112,10 @@ $(()=>{
 
         //call venue list
         this.get('#/venuesList',handlers.venuesList);
+
+        //create venue
+        this.get('#/createVenue',handlers.createVenue);
+        this.post('#/createVenue',handlers.createVenueAction);
     });
 
     app.run();
