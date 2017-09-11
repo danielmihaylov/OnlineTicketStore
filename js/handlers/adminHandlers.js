@@ -89,7 +89,7 @@ handlers.createEventAction = function (ctx) {
         currency: ctx.params.currency,
         tickets: ctx.params.tickets,
         description: ctx.params.description,
-        image: 'images/' + ctx.params.image
+        image: ctx.params.image
     };
 
     if (Number(newEvent.tickets) > 0) {
