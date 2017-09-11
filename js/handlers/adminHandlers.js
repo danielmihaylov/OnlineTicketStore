@@ -1,29 +1,32 @@
 handlers.eventEdit = function (ctx) {
     auth.loginStatusCheck(ctx);
+    if (!ctx.isAdmin) {
+        messenger.showError('Unauthorized');
+        ctx.redirect('#/home');
+    } else {
+        let eventId = ctx.params.eventId.slice(1);
+        eventService.getEvent(eventId)
+            .then(function (data) {
+                ctx._id = data._id;
+                ctx.star = data.star;
+                ctx.category = data.category;
+                ctx.date = data.date;
+                ctx.location = data.location;
+                ctx.price = data.price;
+                ctx.currency = data.currency;
+                ctx.tickets = data.tickets;
+                ctx.description = data.description;
 
-    let eventId = ctx.params.eventId.slice(1);
-
-    eventService.getEvent(eventId)
-        .then(function (data) {
-            ctx._id = data._id;
-            ctx.star = data.star;
-            ctx.category = data.category;
-            ctx.date = data.date;
-            ctx.location = data.location;
-            ctx.price = data.price;
-            ctx.currency = data.currency;
-            ctx.tickets = data.tickets;
-            ctx.description = data.description;
-
-            ctx.loadPartials({
-                header: './templates/common/header.hbs',
-                footer: './templates/common/footer.hbs',
-                eventEditForm: './templates/eventsEdit/eventEditForm.hbs'
-            }).then(function () {
-                ctx.partials = this.partials;
-                ctx.partial('./templates/eventsEdit/eventEditView.hbs');
+                ctx.loadPartials({
+                    header: './templates/common/header.hbs',
+                    footer: './templates/common/footer.hbs',
+                    eventEditForm: './templates/eventsEdit/eventEditForm.hbs'
+                }).then(function () {
+                    ctx.partials = this.partials;
+                    ctx.partial('./templates/eventsEdit/eventEditView.hbs');
+                })
             })
-        })
+    }
 };
 
 handlers.eventEditAction = function (ctx) {
@@ -39,7 +42,7 @@ handlers.eventEditAction = function (ctx) {
         description: ctx.params.description
     };
 
-    eventService.updateEvent(eventId,editedEvent)
+    eventService.updateEvent(eventId, editedEvent)
         .then(function () {
             ctx.redirect('#/eventsList');
         })
@@ -57,13 +60,18 @@ handlers.eventDeleteAction = function (ctx) {
 
 //call create event page
 handlers.createEvent = function () {
-    this.loadPartials({
-        header:'./templates/common/header.hbs',
-        footer:'./templates/common/footer.hbs',
-        createEventForm :'./templates/eventsCreate/eventCreateForm.hbs'
-    }).then(function () {
-        this.partial('./templates/eventsCreate/eventCreateView.hbs');
-    })
+    if (!ctx.isAdmin) {
+        messenger.showError('Unauthorized');
+        ctx.redirect('#/home');
+    } else {
+        this.loadPartials({
+            header: './templates/common/header.hbs',
+            footer: './templates/common/footer.hbs',
+            createEventForm: './templates/eventsCreate/eventCreateForm.hbs'
+        }).then(function () {
+            this.partial('./templates/eventsCreate/eventCreateView.hbs');
+        })
+    }
 };
 
 //Create the event - post data from the create event page to Kinvey
@@ -120,14 +128,14 @@ handlers.createVenueAction = function (ctx) {
 //Call edit venue page and fill in the form with the existing data
 handlers.editVenue = function (ctx) {
     auth.loginStatusCheck(ctx);
-    if(!ctx.isAdmin){
+    if (!ctx.isAdmin) {
         messenger.showError('Unauthorized');
         ctx.redirect('#/home');
-    }else{
+    } else {
         let venueId = ctx.params.venueId.slice(1);
         venueService.getVenue(venueId)
             .then(function (data) {
-                ctx._id=data._id;
+                ctx._id = data._id;
                 ctx.name = data.name;
                 ctx.location = data.location;
                 ctx.image = data.image;
@@ -138,7 +146,7 @@ handlers.editVenue = function (ctx) {
                     footer: './templates/common/footer.hbs',
                     editVenueForm: './templates/venueEdit/editVenueForm.hbs'
                 }).then(function () {
-                    ctx.partials=this.partials;
+                    ctx.partials = this.partials;
                     ctx.partial('./templates/venueEdit/editVenuePage.hbs');
                 })
             })
@@ -149,20 +157,20 @@ handlers.editVenue = function (ctx) {
 //Edit the venue in the backend
 handlers.editVenueAction = function (ctx) {
     auth.loginStatusCheck(ctx);
-    if(!ctx.isAdmin){
+    if (!ctx.isAdmin) {
         messenger.showError('Unauthorized');
         ctx.redirect('#/home');
-    }else{
+    } else {
         let venueId = ctx.params.venueId.slice(1);
         console.log(venueId);
         let editedVenue = {
-            location:ctx.params.location,
-            image:ctx.params.image,
-            name:ctx.params.name,
-            description:ctx.params.description
+            location: ctx.params.location,
+            image: ctx.params.image,
+            name: ctx.params.name,
+            description: ctx.params.description
         };
 
-        venueService.updateVenue(venueId,editedVenue)
+        venueService.updateVenue(venueId, editedVenue)
             .then(function () {
                 ctx.redirect('#/venuesList');
             })
@@ -171,9 +179,9 @@ handlers.editVenueAction = function (ctx) {
 
 handlers.deleteVenue = function (ctx) {
     auth.loginStatusCheck(ctx);
-    if(!ctx.isAdmin){
+    if (!ctx.isAdmin) {
         ctx.redirect('#/home');
-    }else{
+    } else {
         let venueId = ctx.params.venueId.slice(1);
 
         venueService.deleteVenue(venueId)
