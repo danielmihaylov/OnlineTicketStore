@@ -48,6 +48,7 @@ handlers.eventDetails = function (ctx) {
     eventService.getEvent(eventId, authentication)
         .then(function (data) {
             ctx.event = data;
+            ctx._id = data._id;
             ctx.loadPartials({
                 header: './templates/common/header.hbs',
                 footer: './templates/common/footer.hbs',
