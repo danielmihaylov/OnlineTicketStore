@@ -21,10 +21,15 @@ let venueService = (() => {
         return requester.update('appdata',`venues/${venueId}`,'',venueData);
     }
 
+    function deleteVenue(venueId) {
+        return requester.remove('appdata',`venues/${venueId}`, '');
+    }
+
     return {
         getVenues,
         createVenue,
         getVenue,
-        updateVenue
+        updateVenue,
+        deleteVenue
     }
 })();

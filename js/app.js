@@ -120,6 +120,9 @@ $(()=>{
         //edit venue
         this.get('#/editVenue/:venueId',handlers.editVenue);
         this.post('#/editVenue/:venueId',handlers.editVenueAction);
+
+        //delete venue
+        this.get('#/deleteVenue/:venueId',handlers.deleteVenue);
     });
 
     app.run();
