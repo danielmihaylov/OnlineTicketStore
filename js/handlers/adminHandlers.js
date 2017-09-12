@@ -66,7 +66,8 @@ handlers.eventDeleteAction = function (ctx) {
 };
 
 //call create event page
-handlers.createEvent = function () {
+handlers.createEvent = function (ctx) {
+    auth.loginStatusCheck(ctx);
     this.loadPartials({
         header:'./templates/common/header.hbs',
         footer:'./templates/common/footer.hbs',
