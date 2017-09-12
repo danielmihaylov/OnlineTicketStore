@@ -112,6 +112,9 @@ $(()=>{
 
         //call venue list
         this.get('#/venuesList',handlers.venuesList);
+
+        //CALL NEWS LIST
+        this.get('#/news', handlers.newsList);
     });
 
     app.run();

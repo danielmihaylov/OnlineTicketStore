@@ -1,0 +1,15 @@
+
+    <img src="images/{{image}}" style="width:70px;height:40px;">
+    {{title}}<br>
+    {{summary}}
+    <button class="w3-button w3-green w3-padding-small"><a href="#/eventDetails/:{{_id}}">[View more]</a></button>
+
+        {{#if isAdmin}}
+
+            <button class="w3-button w3-green w3-padding-small"><a href="#/edit/:{{_id}}">[Edit]</a></button>
+            <hr>
+            <button class="w3-button w3-red w3-padding-small"><a href="#/delete/:{{_id}}">[Delete]</a></button>
+
+        {{/if}}
+
+

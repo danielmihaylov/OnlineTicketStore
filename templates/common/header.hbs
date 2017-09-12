@@ -36,13 +36,13 @@
                             <li><a href="#/home" id="linkHome" class="active"><i class="fa fa-home"></i>Home</a></li>
                             <li><a href="#/eventsList" id="linkEvents"><i class="fa fa-star"></i>Events</a></li>
                             <li><a href="#/venuesList" id="linkVenues"><i class="fa fa-arrows"></i>Venues</a></li>
+                            <li><a href="#/news" id="linkNews"><i class="fa fa-star"></i>News</a></li>
                             {{#if isUser}}
                                 <li><a href="#/myAccount" id="linkAccount"><i class="fa fa-info"></i>My Account</a></li>
                                 <li><a href="#/cart" id="linkCart"><i class="fa fa-shopping-cart"></i>Cart</a></li>
                                 <li><a href="#/logout" id="linkLogout"><i class="fa fa-sign-out"></i>Logout</a></li>
                             {{else if isAdmin}}
-                                <li><a href="#/create" id="linkCreate"><i class="fa fa-plus"></i>Add</a></li>
-                                <li><a href="#/editEvent" id="linkEdit"><i class="fa fa-cog"></i>Edit</a></li>
+                                <li><a href="#/create" id="linkCreate"><i class="fa fa-plus"></i>Add event</a></li>
                                 <li><a href="#/logout" id="linkLogout"><i class="fa fa-sign-out"></i>Logout</a></li>
                             {{else}}
                                 <li><a href="#/login" id="linkLogin"><i class="fa fa-lock"></i>Login</a></li>
