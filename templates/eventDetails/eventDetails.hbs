@@ -4,16 +4,18 @@
         <div class="w3-padding-64 w3-center w3-white">
                 <div class="w3-half w3-section">
                     <ul class="w3-ul w3-card-2 w3-hover-shadow">
+                        <img src="images/{{event.image}}" alt="{{event.star}}" style="width:431px;height:260px;">
                         <li class="w3-red w3-xlarge w3-padding-32">{{event.star}}</li>
+                        <li class="w3-blue w3-xlarge w3-padding-32">{{event.name}}</li>
                         <li class="w3-padding-16">Category: <b>{{event.category}}</b></li>
                         <li class="w3-padding-16">Date: <b>{{event.date}}</b></li>
                         <li class="w3-padding-16">Location: <b>{{event.location}}</b></li>
                         <li class="w3-padding-16">Description: <b>{{event.description}}</b></li>
                         <li class="w3-padding-16">Price: <b>{{event.price}} {{event.currency}}</b></li>
                         {{#if isAdmin}}
-                            <button class="w3-button w3-black w3-padding-large"><a href="#/delete/:{{_id}}">[Delete]</a></button>
+                            <button class="w3-button w3-red w3-padding-large"><a href="#/delete/:{{_id}}">[Delete]</a></button>
                             <hr>
-                            <button class="w3-button w3-black w3-padding-large"><a href="#/edit/:{{_id}}">[Edit]</a></button>
+                            <button class="w3-button w3-green w3-padding-large"><a href="#/edit/:{{_id}}">[Edit]</a></button>
                         {{/if}}
                         {{#if event.availabality}}
                             {{#if isUser}}
@@ -21,7 +23,7 @@
 
                                 <div><input type="number" name="price" required></div>
                                 <hr>
-                                <a href="#/buy/:{{_id}}">[Buy]</a>
+                                <button class="w3-button w3-red w3-padding-large"><a href="#/buy/:{{_id}}">[Buy]</a></button>
                                 <hr>
                             {{/if}}
                             {{#if isUnlogged}}

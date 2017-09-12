@@ -108,7 +108,7 @@ $(()=>{
         //CREATE EVENT
 
         this.get('#/create',handlers.createEvent);
-        this.post('#/create',handlers.createEventAction);
+        this.post('#/createAction',handlers.createEventAction);
 
         //call venue list
         this.get('#/venuesList',handlers.venuesList);
