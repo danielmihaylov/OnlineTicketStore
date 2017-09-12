@@ -31,22 +31,12 @@ let eventService = (() => {
         return requester.post('appdata','ticket-store','',newEvent);
     }
 
-
-    function getUser(userId) {
-        return requester.get('user', `${userId}`, '');
-    }
-
-    function updateUser(userId,newUser) {
-        return requester.update('user',`${userId}`,'',newUser);
-    }
-
     return {
         getAllEvents,
         getEvent,
         updateEvent,
         deleteEvent,
-        createEvent,
-        getUser,
-        updateUser
+        createEvent
     }
+
 })();

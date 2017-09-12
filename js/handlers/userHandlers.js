@@ -83,7 +83,7 @@ handlers.myAccount = function (ctx) {
     auth.loginStatusCheck(ctx);
     let userId = sessionStorage.getItem('userId');
 
-    eventService.getUser(userId)
+    userService.getUser(userId)
         .then(function (userInfo) {
             ctx.username = userInfo.username;
             ctx.firstName = userInfo.firstName;
@@ -104,7 +104,7 @@ handlers.myAccountEdit = function (ctx) {
     auth.loginStatusCheck(ctx);
     let userId = sessionStorage.getItem('userId');
 
-    eventService.getUser(userId)
+    userService.getUser(userId)
         .then(function (userInfo) {
             ctx.username = userInfo.username;
             ctx.firstName = userInfo.firstName;
@@ -131,9 +131,18 @@ handlers.myAccountEditAction = function (ctx) {
         email:ctx.params.email
     };
 
-    eventService.updateUser(userId,newUser)
+    userService.updateUser(userId,newUser)
         .then(function (userInfo) {
             auth.saveSession(userInfo);
             ctx.redirect('#/myAccount');
+        })
+};
+
+handlers.resetPassword = function (ctx) {
+    userService.resetPassword()
+        .then(function () {
+            messenger.showInfo('Password reset - please check your email');
+            sessionStorage.clear();
+            ctx.redirect('#/home');
         })
 };

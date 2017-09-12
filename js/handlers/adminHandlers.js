@@ -20,7 +20,7 @@ handlers.eventEdit = function (ctx) {
                 ctx.description = data.description;
                 ctx.image = data.image;
 
-    let eventId = ctx.params.eventId.slice(1);
+                let eventId = ctx.params.eventId.slice(1);
 
                 eventService.getEvent(eventId)
                     .then(function (data) {
@@ -47,6 +47,8 @@ handlers.eventEdit = function (ctx) {
                         })
                     })
             });
+    }
+};
 
 handlers.eventEditAction = function (ctx) {
     let eventId = ctx.params.eventId.slice(1);
@@ -68,7 +70,7 @@ handlers.eventEditAction = function (ctx) {
     } else {
         editedEvent.availabality = false;
     }
-    eventService.updateEvent(eventId,editedEvent)
+    eventService.updateEvent(eventId, editedEvent)
         .then(function () {
             ctx.redirect('#/eventsList');
         })
@@ -88,9 +90,9 @@ handlers.eventDeleteAction = function (ctx) {
 handlers.createEvent = function (ctx) {
     auth.loginStatusCheck(ctx);
     this.loadPartials({
-        header:'./templates/common/header.hbs',
-        footer:'./templates/common/footer.hbs',
-        createEventForm :'./templates/eventsCreate/newsCreateForm.hbs'
+        header: './templates/common/header.hbs',
+        footer: './templates/common/footer.hbs',
+        createEventForm: './templates/eventsCreate/newsCreateForm.hbs'
     }).then(function () {
         this.partial('./templates/eventsCreate/newsCreateView.hbs');
     })
@@ -208,17 +210,18 @@ handlers.editVenueAction = function (ctx) {
     }
 };
 
-        handlers.deleteVenue = function (ctx) {
-            auth.loginStatusCheck(ctx);
-            if (!ctx.isAdmin) {
-                ctx.redirect('#/home');
-            } else {
-                let venueId = ctx.params.venueId.slice(1);
+//Delete venue
+handlers.deleteVenue = function (ctx) {
+    auth.loginStatusCheck(ctx);
+    if (!ctx.isAdmin) {
+        ctx.redirect('#/home');
+    } else {
+        let venueId = ctx.params.venueId.slice(1);
 
-                venueService.deleteVenue(venueId)
-                    .then(function () {
-                        ctx.redirect('#/venuesList');
-                    })
-            }
-        };
+        venueService.deleteVenue(venueId)
+            .then(function () {
+                ctx.redirect('#/venuesList');
+            })
+    }
+};
 

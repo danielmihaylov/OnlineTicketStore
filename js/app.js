@@ -48,6 +48,9 @@ $(()=>{
         this.get('#/myAccountEdit',handlers.myAccountEdit);
         this.post('#/myAccountEdit',handlers.myAccountEditAction);
 
+        //reset password
+        this.get('#/resetPass',handlers.resetPassword);
+
         //CART
 
         this.get('#/cart',handlers.cart);
