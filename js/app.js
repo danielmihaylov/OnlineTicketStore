@@ -120,6 +120,17 @@ $(()=>{
         //call venue list
         this.get('#/venuesList',handlers.venuesList);
 
+        //create venue
+        this.get('#/createVenue',handlers.createEvent);
+        this.post('#/createVenue',handlers.createVenueAction);
+
+        //edit venue
+        this.get('#/editVenue/:venueId',handlers.editVenue);
+        this.post('#/editVenue/:venueId',handlers.editVenueAction);
+
+        //delete venue
+        this.get('#/deleteVenue/:venueId',handlers.deleteVenue);
+
         //CALL NEWS LIST
         this.get('#/news', handlers.newsList);
 

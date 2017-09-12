@@ -1870,17 +1870,7 @@ h2.title {
     bottom: 10px;
 }
 
-#editVenueButton {
-    text-align: center;
-    width: 5px;
-    position: absolute;
-    right: 40px;
-    bottom: 10px;
-}
-
-#deleteVenueButton{
-    text-align: center;
-    width: 5px;
+.venue-controls-admin {
     position: absolute;
     right: 20px;
     bottom: 10px;

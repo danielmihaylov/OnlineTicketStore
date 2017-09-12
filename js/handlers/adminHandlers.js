@@ -195,7 +195,6 @@ handlers.editVenueAction = function (ctx) {
         ctx.redirect('#/home');
     } else {
         let venueId = ctx.params.venueId.slice(1);
-        console.log(venueId);
         let editedVenue = {
             location: ctx.params.location,
             image: ctx.params.image,
