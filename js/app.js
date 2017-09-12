@@ -40,9 +40,13 @@ $(()=>{
 
         this.get('#/logout',handlers.logout);
 
-        //MY ACCOUNT
+        //display the My Account view
 
         this.get('#/myAccount', handlers.myAccount);
+
+        //edit my account
+        this.get('#/myAccountEdit',handlers.myAccountEdit);
+        this.post('#/myAccountEdit',handlers.myAccountEditAction);
 
         //CART
 

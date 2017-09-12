@@ -31,10 +31,14 @@ let eventService = (() => {
         return requester.post('appdata','ticket-store','',newEvent);
     }
 
-    //Not Working
-    // function getUser(userId) {
-    //     return requester.get('appdata', `users/${userId}`, 'kinvey');
-    // }
+
+    function getUser(userId) {
+        return requester.get('user', `${userId}`, '');
+    }
+
+    function updateUser(userId,newUser) {
+        return requester.update('user',`${userId}`,'',newUser);
+    }
 
     return {
         getAllEvents,
@@ -42,6 +46,7 @@ let eventService = (() => {
         updateEvent,
         deleteEvent,
         createEvent,
-        //getUser
+        getUser,
+        updateUser
     }
 })();

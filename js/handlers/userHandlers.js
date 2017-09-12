@@ -68,17 +68,6 @@ handlers.logout = function (ctx) {
         })
 };
 
-handlers.myAccount = function () {
-    auth.loginStatusCheck(this);
-
-    this.loadPartials({
-        header: './templates/common/header.hbs',
-        footer: './templates/common/footer.hbs'
-    }).then(function () {
-        this.partial('./templates/myAccount/myAccountView.hbs');
-    })
-};
-
 handlers.cart = function () {
     auth.loginStatusCheck(this);
 
@@ -90,27 +79,61 @@ handlers.cart = function () {
     })
 };
 
+handlers.myAccount = function (ctx) {
+    auth.loginStatusCheck(ctx);
+    let userId = sessionStorage.getItem('userId');
 
+    eventService.getUser(userId)
+        .then(function (userInfo) {
+            ctx.username = userInfo.username;
+            ctx.firstName = userInfo.firstName;
+            ctx.lastName = userInfo.lastName;
+            ctx.email = userInfo.email;
+            ctx.loadPartials({
+                header: './templates/common/header.hbs',
+                footer: './templates/common/footer.hbs',
+                myAccountForm:'./templates/myAccount/myAccountForm.hbs'
+            }).then(function () {
+                ctx.partials=this.partials;
+                ctx.partial('./templates/myAccount/myAccountView.hbs');
+            })
+        })
+};
 
+handlers.myAccountEdit = function (ctx) {
+    auth.loginStatusCheck(ctx);
+    let userId = sessionStorage.getItem('userId');
 
-//Not working
-//
-// handlers.myAccount = function (ctx) {
-//     let userId = ctx.params.id.slice(1);
-//
-//     eventService.getUser(userId)
-//         .then(function (userInfo) {
-//             ctx.username = sessionStorage.getItem('username');
-//             ctx.userId = userId;
-//             ctx.name = userInfo.name;
-//             ctx.firstName = userInfo.firstName === sessionStorage.getItem('firstName');
-//             ctx.lastName = userInfo.lastName === sessionStorage.getItem('lastName');
-//             ctx.email = userInfo.email === sessionStorage.getItem('email');
-//             ctx.loadPartials({
-//                 header: './templates/common/header.hbs',
-//                 footer: './templates/common/footer.hbs',
-//             }).then(function () {
-//                 this.partial('./templates/myAccount/myAccountView.hbs');
-//             })
-//         })
-// };
+    eventService.getUser(userId)
+        .then(function (userInfo) {
+            ctx.username = userInfo.username;
+            ctx.firstName = userInfo.firstName;
+            ctx.lastName = userInfo.lastName;
+            ctx.email = userInfo.email;
+            ctx.loadPartials({
+                header: './templates/common/header.hbs',
+                footer: './templates/common/footer.hbs',
+                myAccountEditForm:'./templates/myAccountEdit/myAccountEditForm.hbs'
+            }).then(function () {
+                ctx.partials=this.partials;
+                ctx.partial('./templates/myAccountEdit/myAccountEditView.hbs');
+            })
+        })
+};
+
+handlers.myAccountEditAction = function (ctx) {
+    let userId = sessionStorage.getItem('userId');
+
+    let newUser = {
+        username:ctx.params.username,
+        firstName:ctx.params.firstName,
+        lastName:ctx.params.lastName,
+        email:ctx.params.email
+    };
+
+    eventService.updateUser(userId,newUser)
+        .then(function (userInfo) {
+            auth.saveSession(userInfo);
+            ctx.redirect('#/myAccount');
+        })
+};
