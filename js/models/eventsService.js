@@ -23,7 +23,7 @@ let eventService = (() => {
     }
 
     //deleteEvent by Daniel
-    function deleteEvent() {
+    function deleteEvent(eventId) {
         return requester.remove('appdata',`ticket-store/${eventId}`, 'kinvey');
     }
 

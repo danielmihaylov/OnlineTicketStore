@@ -62,7 +62,7 @@ handlers.eventDeleteAction = function (ctx) {
     eventService.deleteEvent(eventId)
         .then(function () {
             ctx.redirect('#/home');
-        }).catch(handleError);
+        }).catch(auth.handleError);
 };
 
 //call create event page
