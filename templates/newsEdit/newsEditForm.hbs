@@ -1,0 +1,25 @@
+<form action="#/editNewsAction/:{{_id}}" method="post" id="formEditNews" class="newsForms">
+    <br>
+
+    <div><input type="hidden" name="id" required/></div>
+    <h4>Title:</h4>
+
+    <div><input type="text" name="title" value="{{title}}" required></div>
+    <br>
+    <h4>Summary:</h4>
+    <div><input type="text" name="summary" value="{{summary}}" required></div>
+    <br>
+
+    <h4>Content:</h4>
+
+    <div><input type="text" name="content" value="{{content}}" required></div>
+    <br>
+
+    <h4>Image file name:</h4>
+    <div><input type="text" name="image" value="{{image}}" required></div>
+    <br>
+
+
+    <div><input type="submit" id="buttonEditEvent" class="get" value="Edit Event"></div>
+
+</form>

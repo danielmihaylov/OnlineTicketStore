@@ -21,10 +21,10 @@ handlers.eventEdit = function (ctx) {
             ctx.loadPartials({
                 header: './templates/common/header.hbs',
                 footer: './templates/common/footer.hbs',
-                eventEditForm: './templates/eventsEdit/eventEditForm.hbs'
+                eventEditForm: './templates/eventsEdit/newsEditForm.hbs'
             }).then(function () {
                 ctx.partials = this.partials;
-                ctx.partial('./templates/eventsEdit/eventEditView.hbs');
+                ctx.partial('./templates/eventsEdit/newsEditView.hbs');
             })
         })
 };
@@ -71,9 +71,9 @@ handlers.createEvent = function (ctx) {
     this.loadPartials({
         header:'./templates/common/header.hbs',
         footer:'./templates/common/footer.hbs',
-        createEventForm :'./templates/eventsCreate/eventCreateForm.hbs'
+        createEventForm :'./templates/eventsCreate/newsCreateForm.hbs'
     }).then(function () {
-        this.partial('./templates/eventsCreate/eventCreateView.hbs');
+        this.partial('./templates/eventsCreate/newsCreateView.hbs');
     })
 };
 

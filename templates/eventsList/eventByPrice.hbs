@@ -1,6 +1,6 @@
 {{#if inSamePrice}}
     <tr>
-        <td><button class="w3-button w3-green w3-padding-large"><a href="#/eventDetails/:{{_id}}">[Details]</a></button></td>
+        <td><button-small class="w3-button w3-green w3-padding-large"><a href="#/eventDetails/:{{_id}}">[Details]</a></button-small></td>
         <td>{{star}}<br><a href="#/eventDetails/:{{_id}}">[Details]</a></td>
         <td>{{date}}</td>
         <td>{{category}}</td>
@@ -8,9 +8,9 @@
         <td>
     {{#if isAdmin}}
 
-            <button class="w3-button w3-green w3-padding-small"><a href="#/edit/:{{_id}}">[Edit]</a></button>
+            <button class="w3-button-small w3-green w3-padding-small"><a href="#/edit/:{{_id}}">[Edit]</a></button>
             <hr>
-            <button class="w3-button w3-red w3-padding-small"><a href="#/delete/:{{_id}}">[Delete]</a></button>
+            <button class="w3-button-small w3-red w3-padding-small"><a href="#/delete/:{{_id}}">[Delete]</a></button>
 
     {{else}}
                 {{#if isUnlogged}}
@@ -20,7 +20,7 @@
 
                     <div><input type="number" name="price" required></div>
                     <hr>
-                        <button class="w3-button w3-red w3-padding-small"><a href="#/buy/:{{_id}}">[Buy]</a></button>
+                        <button class="w3-button-small w3-red w3-padding-small"><a href="#/buy/:{{_id}}">[Buy]</a></button>
                     <hr>
                 {{/if}}
             {{/if}}

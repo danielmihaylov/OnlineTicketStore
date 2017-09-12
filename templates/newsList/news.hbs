@@ -1,0 +1,17 @@
+
+<img src="images/{{image}}" alt="Sandwich" style="width:100%">
+<br><br>
+<h3>{{title}}</h3>
+<p><i>{{summary}}</i></p>
+<button class="w3-button-small w3-green w3-padding-small"><a href="#/newsDetails/:{{_id}}">[View more]</a></button>
+{{#if isAdmin}}
+    <button class="w3-button-small w3-green w3-padding-small"><a href="#/editNews/:{{_id}}">[Edit]</a></button>
+    <hr>
+    <button class="w3-button-small w3-red w3-padding-small"><a href="#/deleteNews/:{{_id}}">[Delete]</a></button>
+{{/if}}
+
+<br>
+
+
+
+

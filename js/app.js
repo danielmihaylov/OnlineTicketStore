@@ -115,6 +115,23 @@ $(()=>{
 
         //CALL NEWS LIST
         this.get('#/news', handlers.newsList);
+
+        //SHOW NEWS DETAILS
+        this.get('#/newsDetails/:newsId', handlers.newsDetails);
+
+        //CREATE NEWS
+        this.get('#/createNews',handlers.createNews);
+        this.post('#/createNewsAction',handlers.createNewsAction);
+
+        //EDIT NEWS
+
+        this.get('#/editNews/:newsId',handlers.newsEdit);
+        this.post('#/editNewsAction/:newsId',handlers.newsEditAction);
+
+        //DELETE NEWS
+        this.get('#/deleteNews/:newsId',handlers.newsDeleteAction);
+
+
     });
 
     app.run();
