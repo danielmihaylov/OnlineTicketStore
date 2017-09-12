@@ -1,0 +1,19 @@
+<form action="#/editVenue/:{{_id}}" method="post" id="formEditVenue">
+    <br>
+    <h4>Venue name:</h4>
+    <div><input type="text" name="name" value="{{name}}" required></div>
+    <br>
+    <h4>Location:</h4>
+    <div><input type="text" name="location" value="{{location}}" required></div>
+    <br>
+    <h4>Image:</h4>
+
+    <div><input type="url" name="image" value="{{image}}" required></div>
+    <br>
+    <h4>Description:</h4>
+
+    <div><textarea name="description" rows="5" required>{{description}}</textarea></div>
+    <br>
+
+    <div><input type="submit" id="buttonEditVenue" class="get" value="Edit Venue"></div>
+</form>

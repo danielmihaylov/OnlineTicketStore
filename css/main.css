@@ -1634,7 +1634,7 @@ h2.title {
   margin-bottom: 5%;
 }
 
-#formEditEvent, #formCreateEvent {
+#formEditEvent, #formCreateEvent, #formCreateVenue, #formEditVenue {
   width: 100%;
   background: #f9f9f9;
   padding: 0 30px 30px 30px;
@@ -1642,6 +1642,14 @@ h2.title {
   box-shadow: 2px 2px 2px #888888;
   margin-top: 30px;
   margin-bottom: 5%;
+}
+
+#formCreateVenue input,#formEditVenue input{
+  width: 100%;
+}
+
+#formCreateVenue input.get, #formEditVenue input.get{
+  width: auto;
 }
 
 #formCreateEvent {
@@ -1680,12 +1688,16 @@ h2.title {
   color: green;
 }
 
-#linkEdit {
+#linkCreateVenue {
   color: #0376C0;
 }
 
 #viewCreate > h2 {
   color: green;
+}
+
+#viewCreateVenue > h2 {
+  color: #0376C0;
 }
 
 #viewEdit > h2 {
@@ -1699,6 +1711,11 @@ h2.title {
   background: #FFFFFF;
   margin: 15px;
   position: relative;
+}
+
+.post p {
+  padding-bottom: 35px;
+  margin: 10px;
 }
 
 .col {

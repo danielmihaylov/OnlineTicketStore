@@ -130,8 +130,6 @@ $(()=>{
 
         //DELETE NEWS
         this.get('#/deleteNews/:newsId',handlers.newsDeleteAction);
-
-
     });
 
     app.run();

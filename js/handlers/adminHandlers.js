@@ -1,33 +1,52 @@
 handlers.eventEdit = function (ctx) {
     auth.loginStatusCheck(ctx);
+    if (!ctx.isAdmin) {
+        messenger.showError('Unauthorized');
+        ctx.redirect('#/home');
+    } else {
+        let eventId = ctx.params.eventId.slice(1);
+        eventService.getEvent(eventId)
+            .then(function (data) {
+                ctx._id = data._id;
+                ctx.star = data.star;
+                ctx.name = data.name;
+                ctx.category = data.category;
+                ctx.date = data.date;
+                ctx.location = data.location;
+                ctx.country = data.country;
+                ctx.price = data.price;
+                ctx.currency = data.currency;
+                ctx.tickets = data.tickets;
+                ctx.description = data.description;
+                ctx.image = data.image;
 
     let eventId = ctx.params.eventId.slice(1);
 
-    eventService.getEvent(eventId)
-        .then(function (data) {
-            ctx._id = data._id;
-            ctx.star = data.star;
-            ctx.name = data.name;
-            ctx.category = data.category;
-            ctx.date = data.date;
-            ctx.location = data.location;
-            ctx.country = data.country;
-            ctx.price = data.price;
-            ctx.currency = data.currency;
-            ctx.tickets = data.tickets;
-            ctx.description = data.description;
-            ctx.image = data.image;
+                eventService.getEvent(eventId)
+                    .then(function (data) {
+                        ctx._id = data._id;
+                        ctx.star = data.star;
+                        ctx.name = data.name;
+                        ctx.category = data.category;
+                        ctx.date = data.date;
+                        ctx.location = data.location;
+                        ctx.country = data.country;
+                        ctx.price = data.price;
+                        ctx.currency = data.currency;
+                        ctx.tickets = data.tickets;
+                        ctx.description = data.description;
+                        ctx.image = data.image;
 
-            ctx.loadPartials({
-                header: './templates/common/header.hbs',
-                footer: './templates/common/footer.hbs',
-                eventEditForm: './templates/eventsEdit/newsEditForm.hbs'
-            }).then(function () {
-                ctx.partials = this.partials;
-                ctx.partial('./templates/eventsEdit/newsEditView.hbs');
-            })
-        })
-};
+                        ctx.loadPartials({
+                            header: './templates/common/header.hbs',
+                            footer: './templates/common/footer.hbs',
+                            eventEditForm: './templates/eventsEdit/newsEditForm.hbs'
+                        }).then(function () {
+                            ctx.partials = this.partials;
+                            ctx.partial('./templates/eventsEdit/newsEditView.hbs');
+                        })
+                    })
+            });
 
 handlers.eventEditAction = function (ctx) {
     let eventId = ctx.params.eventId.slice(1);
@@ -104,3 +123,102 @@ handlers.createEventAction = function (ctx) {
             ctx.redirect('#/eventsList');
         })
 };
+
+//Create a venue - call create event page
+handlers.createVenue = function () {
+    auth.loginStatusCheck(this);
+    if (!this.isAdmin) {
+        messenger.showError('Unauthorized');
+        this.redirect('#/home');
+    } else {
+        this.loadPartials({
+            header: './templates/common/header.hbs',
+            footer: './templates/common/footer.hbs',
+            createVenueForm: './templates/venueCreate/createVenueForm.hbs'
+        }).then(function () {
+            this.partial('./templates/venueCreate/createVenueView.hbs');
+        })
+    }
+};
+
+//Execute create event action
+handlers.createVenueAction = function (ctx) {
+    let newVenue = {
+        location: ctx.params.location,
+        image: ctx.params.image,
+        name: ctx.params.name,
+        description: ctx.params.description
+    };
+
+    venueService.createVenue(newVenue)
+        .then(function () {
+            ctx.redirect('#/venuesList');
+        })
+};
+
+//Call edit venue page and fill in the form with the existing data
+handlers.editVenue = function (ctx) {
+    auth.loginStatusCheck(ctx);
+    if (!ctx.isAdmin) {
+        messenger.showError('Unauthorized');
+        ctx.redirect('#/home');
+    } else {
+        let venueId = ctx.params.venueId.slice(1);
+        venueService.getVenue(venueId)
+            .then(function (data) {
+                ctx._id = data._id;
+                ctx.name = data.name;
+                ctx.location = data.location;
+                ctx.image = data.image;
+                ctx.description = data.description;
+
+                ctx.loadPartials({
+                    header: './templates/common/header.hbs',
+                    footer: './templates/common/footer.hbs',
+                    editVenueForm: './templates/venueEdit/editVenueForm.hbs'
+                }).then(function () {
+                    ctx.partials = this.partials;
+                    ctx.partial('./templates/venueEdit/editVenuePage.hbs');
+                })
+            })
+    }
+};
+
+
+//Edit the venue in the backend
+handlers.editVenueAction = function (ctx) {
+    auth.loginStatusCheck(ctx);
+    if (!ctx.isAdmin) {
+        messenger.showError('Unauthorized');
+        ctx.redirect('#/home');
+    } else {
+        let venueId = ctx.params.venueId.slice(1);
+        console.log(venueId);
+        let editedVenue = {
+            location: ctx.params.location,
+            image: ctx.params.image,
+            name: ctx.params.name,
+            description: ctx.params.description
+        };
+
+        venueService.updateVenue(venueId, editedVenue)
+            .then(function () {
+                ctx.redirect('#/venuesList');
+            })
+    }
+};
+
+        handlers.deleteVenue = function (ctx) {
+            auth.loginStatusCheck(ctx);
+            if (!ctx.isAdmin) {
+                ctx.redirect('#/home');
+            } else {
+                let venueId = ctx.params.venueId.slice(1);
+
+                venueService.deleteVenue(venueId)
+                    .then(function () {
+                        ctx.redirect('#/venuesList');
+                    })
+            }
+        };
+
