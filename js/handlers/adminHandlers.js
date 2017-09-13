@@ -1,27 +1,19 @@
 handlers.eventEdit = function (ctx) {
     auth.loginStatusCheck(ctx);
+    let authorization = '';
+    if (ctx.isUnlogged) {
+        authorization = 'basic'
+    }
     if (!ctx.isAdmin) {
         messenger.showError('Unauthorized');
         ctx.redirect('#/home');
     } else {
         let eventId = ctx.params.eventId.slice(1);
-        eventService.getEvent(eventId)
-            .then(function (data) {
-                ctx._id = data._id;
-                ctx.star = data.star;
-                ctx.name = data.name;
-                ctx.category = data.category;
-                ctx.date = data.date;
-                ctx.location = data.location;
-                ctx.country = data.country;
-                ctx.price = data.price;
-                ctx.currency = data.currency;
-                ctx.tickets = data.tickets;
-                ctx.description = data.description;
-                ctx.image = data.image;
-
+        let venues;
+        venueService.getVenues(authorization)
+            .then(function (dataVenues) {
+                venues = dataVenues;
                 let eventId = ctx.params.eventId.slice(1);
-
                 eventService.getEvent(eventId)
                     .then(function (data) {
                         ctx._id = data._id;
@@ -36,22 +28,26 @@ handlers.eventEdit = function (ctx) {
                         ctx.tickets = data.tickets;
                         ctx.description = data.description;
                         ctx.image = data.image;
+                        ctx.venueId = data.venue;
+                        ctx.venue=venues.filter(e=>e._id===data.venue)[0].name;
+                        ctx.venues=venues;
 
                         ctx.loadPartials({
                             header: './templates/common/header.hbs',
                             footer: './templates/common/footer.hbs',
-                            eventEditForm: './templates/eventsEdit/newsEditForm.hbs'
+                            eventEditForm: './templates/eventsEdit/eventEditForm.hbs'
                         }).then(function () {
                             ctx.partials = this.partials;
-                            ctx.partial('./templates/eventsEdit/newsEditView.hbs');
+                            ctx.partial('./templates/eventsEdit/eventEditView.hbs');
                         })
                     })
-            });
+            })
     }
 };
 
 handlers.eventEditAction = function (ctx) {
     let eventId = ctx.params.eventId.slice(1);
+
     let editedEvent = {
         star: ctx.params.star,
         name: ctx.params.name,
@@ -63,7 +59,8 @@ handlers.eventEditAction = function (ctx) {
         currency: ctx.params.currency,
         tickets: ctx.params.tickets,
         description: ctx.params.description,
-        image: ctx.params.image
+        image: ctx.params.image,
+        venue:ctx.params.venue
     };
     if (Number(editedEvent.tickets) > 0) {
         editedEvent.availabality = true;
@@ -82,20 +79,36 @@ handlers.eventDeleteAction = function (ctx) {
 
     eventService.deleteEvent(eventId)
         .then(function () {
-            ctx.redirect('#/home');
+            ctx.redirect('#/eventsList');
         }).catch(auth.handleError);
 };
 
 //call create event page
 handlers.createEvent = function (ctx) {
     auth.loginStatusCheck(ctx);
-    this.loadPartials({
-        header: './templates/common/header.hbs',
-        footer: './templates/common/footer.hbs',
-        createEventForm: './templates/eventsCreate/newsCreateForm.hbs'
-    }).then(function () {
-        this.partial('./templates/eventsCreate/newsCreateView.hbs');
-    })
+    let authorization = '';
+    if (ctx.isUnlogged) {
+        authorization = 'basic'
+    }
+    if (!ctx.isAdmin) {
+        messenger.showError('Unauthorized');
+        ctx.redirect('#/home');
+    } else {
+        venueService.getVenues(authorization)
+            .then(function (venues) {
+                ctx.venues=venues;
+                ctx.loadPartials({
+                    header: './templates/common/header.hbs',
+                    footer: './templates/common/footer.hbs',
+                    createEventForm: './templates/eventsCreate/eventCreateForm.hbs'
+                }).then(function () {
+                    ctx.partials=this.partials;
+                    ctx.partial('./templates/eventsCreate/eventCreateView.hbs');
+                })
+            });
+
+
+    }
 };
 
 //Create the event - post data from the create event page to Kinvey
@@ -111,7 +124,8 @@ handlers.createEventAction = function (ctx) {
         currency: ctx.params.currency,
         tickets: ctx.params.tickets,
         description: ctx.params.description,
-        image: ctx.params.image
+        image: ctx.params.image,
+        venue:ctx.params.venue
     };
 
     if (Number(newEvent.tickets) > 0) {

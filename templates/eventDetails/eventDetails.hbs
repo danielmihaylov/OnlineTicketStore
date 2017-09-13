@@ -12,6 +12,7 @@
                         <li class="w3-padding-16">Location: <b>{{event.location}}</b></li>
                         <li class="w3-padding-16">Description: <b>{{event.description}}</b></li>
                         <li class="w3-padding-16">Price: <b>{{event.price}} {{event.currency}}</b></li>
+                        <li class="w3-padding-16">Venue: <b>{{venueName}}</b></li>
                         {{#if isAdmin}}
                             <button class="w3-button-small w3-red w3-padding-large"><a href="#/delete/:{{_id}}">[Delete]</a></button>
                             <hr>

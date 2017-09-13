@@ -43,19 +43,22 @@ handlers.eventDetails = function (ctx) {
     auth.loginStatusCheck(ctx);
     if (ctx.isUnlogged) {
         authentication = 'basic';
-
     }
     eventService.getEvent(eventId, authentication)
         .then(function (data) {
-            ctx.event = data;
-            ctx._id = data._id;
-            ctx.loadPartials({
-                header: './templates/common/header.hbs',
-                footer: './templates/common/footer.hbs',
-            }).then(function () {
-                ctx.partials = this.partials;
-                ctx.partial('./templates/eventDetails/eventDetails.hbs');
-            });
+            venueService.getVenue(data.venue,authentication)
+                .then(function (venue) {
+                    ctx.venueName=venue.name;
+                    ctx.event = data;
+                    ctx._id = data._id;
+                    ctx.loadPartials({
+                        header: './templates/common/header.hbs',
+                        footer: './templates/common/footer.hbs',
+                    }).then(function () {
+                        ctx.partials = this.partials;
+                        ctx.partial('./templates/eventDetails/eventDetails.hbs');
+                    });
+                })
         });
 
 };

@@ -34,6 +34,17 @@
 
     <div><input type="text" name="country" value="{{country}}" required></div>
     <br>
+    <h4>Venue:</h4>
+
+    <div>
+        <select name="venue">
+            <option value="{{venueId}}" selected>{{venue}}</option>
+            {{#each venues}}
+                <option value="{{this._id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <br>
     <h4>Price:</h4>
 
     <div><input type="number" name="price" value="{{price}}" required></div>
@@ -42,7 +53,7 @@
 
     <div>
         <select name="currency">
-            <option>{{currency}}</option>
+            <option selected>{{currency}}</option>
             <option>lv. (BG leva)</option>
             <option>€ (Euro)</option>
             <option>Ƀ (Bitcoin)</option>

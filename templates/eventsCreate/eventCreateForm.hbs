@@ -30,6 +30,16 @@
     <div><input type="text" name="country" required></div>
     <br>
 
+    <h4>Venue:</h4>
+
+    <div>
+        <select name="venue" required>
+            {{#each venues}}
+                <option value="{{this._id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
+    </div>
+
     <h4>Location:</h4>
 
     <div><input type="text" name="location" required></div>
