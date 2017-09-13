@@ -7,27 +7,36 @@ handlers.eventsList = function (ctx) {
         authentication = 'basic';
     }
     eventService.getAllEvents(authentication)
-        .then(function (data) {
-            ctx.events = data;
-
-            if(ctx.isAdmin) {
-                for (let obj of ctx.events) {
-                    obj.isAdmin=true;
+        .then(function (events) {
+            ctx.events = events;
+            if (ctx.isAdmin) {
+                for (let event of ctx.events) {
+                    event.isAdmin = true;
                 }
-            }else if(ctx.isUnlogged) {
-                for (let obj of ctx.events) {
-                    obj.isUnlogged=true;
+            } else if (ctx.isUnlogged) {
+                for (let event of ctx.events) {
+                    event.isUnlogged = true;
                 }
             }
+            venueService.getVenues(authentication)
+                .then(function (venues) {
 
-            ctx.loadPartials({
-                header: './templates/common/header.hbs',
-                footer: './templates/common/footer.hbs',
-                event: './templates/eventsList/event.hbs'
-            }).then(function () {
-                ctx.partials = this.partials;
-                ctx.partial('./templates/eventsList/eventsList.hbs');
-            })
+                    for (let event of ctx.events) {
+                        event.venueName = venues.filter(v => v._id === event.venue)[0].name;
+                    }
+
+                    ctx.loadPartials({
+                        header: './templates/common/header.hbs',
+                        footer: './templates/common/footer.hbs',
+                        event: './templates/eventsList/event.hbs'
+                    }).then(function () {
+                        ctx.partials = this.partials;
+                        ctx.partial('./templates/eventsList/eventsList.hbs');
+                    })
+                })
+                .catch(function (reason) {
+                    auth.handleError(reason);
+                });
         })
         .catch(function (reason) {
             auth.handleError(reason);
@@ -46,9 +55,9 @@ handlers.eventDetails = function (ctx) {
     }
     eventService.getEvent(eventId, authentication)
         .then(function (data) {
-            venueService.getVenue(data.venue,authentication)
+            venueService.getVenue(data.venue, authentication)
                 .then(function (venue) {
-                    ctx.venueName=venue.name;
+                    ctx.venueName = venue.name;
                     ctx.event = data;
                     ctx._id = data._id;
                     ctx.loadPartials({
@@ -66,17 +75,17 @@ handlers.eventDetails = function (ctx) {
 //SHOW EVENTS BY CATEGORY
 
 handlers.concerts = function (ctx) {
-    let category  = 'Concert';
+    let category = 'Concert';
     handlers.eventsListByCategory(ctx, category);
 };
 
 handlers.specialEvents = function (ctx) {
-    let category  = 'Special Event';
+    let category = 'Special Event';
     handlers.eventsListByCategory(ctx, category);
 };
 
 handlers.theater = function (ctx) {
-    let category  = 'Theater';
+    let category = 'Theater';
     handlers.eventsListByCategory(ctx, category);
 };
 
@@ -99,19 +108,19 @@ handlers.eventsListByCategory = function (ctx, searchedCategory) {
                 if (obj.category === searchedCategory) {
                     obj.isInCategory = true;
                     ctx.thereIsEventsInCategory = true;
-                }else{
+                } else {
                     obj.isInCategory = false;
                 }
 
             }
 
-            if(ctx.isAdmin) {
+            if (ctx.isAdmin) {
                 for (let obj of ctx.events) {
-                    obj.isAdmin=true;
+                    obj.isAdmin = true;
                 }
-            }else if(ctx.isUnlogged) {
+            } else if (ctx.isUnlogged) {
                 for (let obj of ctx.events) {
-                    obj.isUnlogged=true;
+                    obj.isUnlogged = true;
                 }
             }
 
@@ -180,19 +189,19 @@ handlers.eventListByCountry = function (ctx, searchedCountry) {
                 if (obj.country === searchedCountry) {
                     obj.inSameCountry = true;
                     ctx.thereIsEventsOfTheSameCoutry = true;
-                }else{
+                } else {
                     obj.inSameCountry = false;
                 }
 
             }
 
-            if(ctx.isAdmin) {
+            if (ctx.isAdmin) {
                 for (let obj of ctx.events) {
-                    obj.isAdmin=true;
+                    obj.isAdmin = true;
                 }
-            }else if(ctx.isUnlogged) {
+            } else if (ctx.isUnlogged) {
                 for (let obj of ctx.events) {
-                    obj.isUnlogged=true;
+                    obj.isUnlogged = true;
                 }
             }
 
@@ -312,19 +321,19 @@ handlers.eventListByDate = function (ctx, searchedDate) {
                 if (month === searchedDate[0] && year === searchedDate[1]) {
                     obj.inSameMonth = true;
                     ctx.thereIsEventsOfTheSameMonth = true;
-                }else{
+                } else {
                     obj.inSameMonth = false;
                 }
 
             }
 
-            if(ctx.isAdmin) {
+            if (ctx.isAdmin) {
                 for (let obj of ctx.events) {
-                    obj.isAdmin=true;
+                    obj.isAdmin = true;
                 }
-            }else if(ctx.isUnlogged) {
+            } else if (ctx.isUnlogged) {
                 for (let obj of ctx.events) {
-                    obj.isUnlogged=true;
+                    obj.isUnlogged = true;
                 }
             }
 
@@ -385,8 +394,8 @@ handlers.eventListByPrice = function (ctx, searchedPrice) {
             ctx.thereIsEventsOfTheSamePrice = false;
             for (let obj of ctx.events) {
                 let price = Number(obj.price);
-                if(price !== 0) {
-                    switch(obj.currency){
+                if (price !== 0) {
+                    switch (obj.currency) {
                         case "£ (GB pound)":
                             price *= 2.15;
                             break;
@@ -406,19 +415,19 @@ handlers.eventListByPrice = function (ctx, searchedPrice) {
                 if (price < searchedPrice[1] && price >= searchedPrice[0]) {
                     obj.inSamePrice = true;
                     ctx.thereIsEventsOfTheSamePrice = true;
-                }else{
+                } else {
                     obj.inSamePrice = false;
                 }
 
             }
 
-            if(ctx.isAdmin) {
+            if (ctx.isAdmin) {
                 for (let obj of ctx.events) {
-                    obj.isAdmin=true;
+                    obj.isAdmin = true;
                 }
-            }else if(ctx.isUnlogged) {
+            } else if (ctx.isUnlogged) {
                 for (let obj of ctx.events) {
-                    obj.isUnlogged=true;
+                    obj.isUnlogged = true;
                 }
             }
 
