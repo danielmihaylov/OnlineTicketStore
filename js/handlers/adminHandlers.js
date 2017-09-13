@@ -208,17 +208,17 @@ handlers.editVenueAction = function (ctx) {
     }
 };
 
-        handlers.deleteVenue = function (ctx) {
-            auth.loginStatusCheck(ctx);
-            if (!ctx.isAdmin) {
-                ctx.redirect('#/home');
-            } else {
-                let venueId = ctx.params.venueId.slice(1);
+handlers.deleteVenue = function (ctx) {
+    auth.loginStatusCheck(ctx);
+    if (!ctx.isAdmin) {
+        ctx.redirect('#/home');
+    } else {
+        let venueId = ctx.params.venueId.slice(1);
 
-                venueService.deleteVenue(venueId)
-                    .then(function () {
-                        ctx.redirect('#/venuesList');
-                    })
-            }
-        };
+        venueService.deleteVenue(venueId)
+            .then(function () {
+                ctx.redirect('#/venuesList');
+            })
+    }
+};
 
