@@ -54,6 +54,8 @@ $(()=>{
         //CART
 
         this.get('#/cart',handlers.cart);
+        this.get('#/addInCart/:eventId', handlers.addInCart);
+        this.post('#/addInCartAction/:eventId', handlers.addInCartAction)
 
         //SHOW EVENTS INFO
 

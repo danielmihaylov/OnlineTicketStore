@@ -16,12 +16,13 @@
             {{#if isUnlogged}}
                 <p>If you want to buy tickets, have to log in.</p>
             {{else}}
-                <h4>Price:</h4>
-
-                <div><input type="number" name="price" required></div>
+                <h4>Count tickets:</h4>
+            <form action="#/addInCart/:{{_id}}", method="get">
+                <div><input type="number" name="countTickets" required></div>
                 <hr>
-                <button class="w3-button-small w3-red w3-padding-small"><a href="#/buy/:{{_id}}">[Buy]</a></button>
+                <input type="submit" class="w3-button-small w3-red w3-padding-small">[Add in the cart]</a></button>
                 <hr>
+            </form>
             {{/if}}
         {{/if}}
 

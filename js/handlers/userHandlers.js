@@ -79,6 +79,54 @@ handlers.cart = function () {
     })
 };
 
+//ADD TICKETS IN THE CART
+
+handlers.addInCart = function (ctx) {
+    let eventId = ctx.params.eventId.slice(1);
+    auth.loginStatusCheck(this);
+    let product = {};
+    console.log(ctx.params.countTickets)
+    product.countTickets = ctx.params.countTickets;
+    eventService.getEvent(eventId)
+        .then(function (data) {
+            product.event = data;
+            ctx._id = data._id;
+
+            product.sum = Number(ctx.params.countTickets) * product.event.price;
+            ctx.product = product
+            ctx.loadPartials({
+                header: './templates/common/header.hbs',
+                footer: './templates/common/footer.hbs',
+                product: './templates/cart/product.hbs'
+            }).then(function () {
+                this.partial('./templates/cart/cartView.hbs');
+            });
+        });
+
+    //ADD TICKETS IN THE CART POST
+
+
+
+//    console.log(1)
+//    let eventId = ctx.params.eventId.slice(1);
+//    let user = {
+//        username:ctx.params.username,
+//        firstName:ctx.params.firstName,
+//        lastName:ctx.params.lastName,
+//        email:ctx.params.email,
+//        cart: {
+//            eventId: eventId,
+//            countTickets: ctx.params.countTickets,
+//        }
+//
+//    };
+//
+//    userService.addInCart(user)
+//        .then(function () {
+//            ctx.redirect('#/cart');
+//        })
+};
+
 handlers.myAccount = function (ctx) {
     auth.loginStatusCheck(ctx);
     let userId = sessionStorage.getItem('userId');
