@@ -8,12 +8,12 @@
     <h3>Location: {{location}}</h3>
     <p>{{description}}</p>
     <div class="venue-controls">
-        <a href="#/venueEvents/:{{_id}}" class="btn btn-default">View events for this venue</a>
+        <a href="#/venueEvents/:{{_id}}" class="btn btn-primary">View events for this venue</a>
     </div>
     {{#if isAdmin}}
         <div class="venue-controls-admin">
-            <a href="#/editVenue/:{{_id}}" class="btn btn-default"><i class="fa fa-edit"></i></a>
-            <a href="#/deleteVenue/:{{_id}}" class="btn btn-default"><i class="fa fa-trash-o"></i></a>
+            <a href="#/editVenue/:{{_id}}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+            <a href="#/deleteVenue/:{{_id}}" class="btn btn-primary"><i class="fa fa-trash-o"></i></a>
         </div>
     {{/if}}
 </article>

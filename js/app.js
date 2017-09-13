@@ -48,6 +48,9 @@ $(()=>{
         this.get('#/myAccountEdit',handlers.myAccountEdit);
         this.post('#/myAccountEdit',handlers.myAccountEditAction);
 
+        //reset password
+        this.get('#/resetPass',handlers.resetPassword);
+
         //CART
 
         this.get('#/cart',handlers.cart);
@@ -116,6 +119,17 @@ $(()=>{
 
         //call venue list
         this.get('#/venuesList',handlers.venuesList);
+
+        //create venue
+        this.get('#/createVenue',handlers.createEvent);
+        this.post('#/createVenue',handlers.createVenueAction);
+
+        //edit venue
+        this.get('#/editVenue/:venueId',handlers.editVenue);
+        this.post('#/editVenue/:venueId',handlers.editVenueAction);
+
+        //delete venue
+        this.get('#/deleteVenue/:venueId',handlers.deleteVenue);
 
         //CALL NEWS LIST
         this.get('#/news', handlers.newsList);
