@@ -173,6 +173,7 @@ handlers.editVenue = function (ctx) {
                 ctx.location = data.location;
                 ctx.image = data.image;
                 ctx.description = data.description;
+                ctx.url = data.url;
 
                 ctx.loadPartials({
                     header: './templates/common/header.hbs',
@@ -199,8 +200,10 @@ handlers.editVenueAction = function (ctx) {
             location: ctx.params.location,
             image: ctx.params.image,
             name: ctx.params.name,
-            description: ctx.params.description
+            description: ctx.params.description,
+            url: ctx.params.url
         };
+        console.log(editedVenue);
 
         venueService.updateVenue(venueId, editedVenue)
             .then(function () {

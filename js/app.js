@@ -1,22 +1,19 @@
 const handlers = {};
 
-$(()=>{
+$(() => {
 
     let loadingBox = $('#loadingBox');
-    let dummy = $('#dummy');
     $(document).on({
         ajaxStart: function () {
-            dummy.hide();
             loadingBox.show()
         },
         ajaxStop: function () {
             loadingBox.hide();
-            dummy.show();
         }
     });
 
-    const app = Sammy ('#app',function () {
-        this.use('Handlebars','hbs');
+    const app = Sammy('#app', function () {
+        this.use('Handlebars', 'hbs');
 
         //HOME
 
@@ -24,40 +21,40 @@ $(()=>{
             this.redirect('#/home');
         });
 
-        this.get('#/home',handlers.home);
+        this.get('#/home', handlers.home);
 
         //LOGIN
 
-        this.get('#/login',handlers.login);
-        this.post('#/login',handlers.loginAction);
+        this.get('#/login', handlers.login);
+        this.post('#/login', handlers.loginAction);
 
         //REGISTER
 
-        this.get('#/register',handlers.register);
-        this.post('#/register',handlers.registerAction);
+        this.get('#/register', handlers.register);
+        this.post('#/register', handlers.registerAction);
 
         //LOGOUT
 
-        this.get('#/logout',handlers.logout);
+        this.get('#/logout', handlers.logout);
 
         //display the My Account view
 
         this.get('#/myAccount', handlers.myAccount);
 
         //edit my account
-        this.get('#/myAccountEdit',handlers.myAccountEdit);
-        this.post('#/myAccountEdit',handlers.myAccountEditAction);
+        this.get('#/myAccountEdit', handlers.myAccountEdit);
+        this.post('#/myAccountEdit', handlers.myAccountEditAction);
 
         //reset password
-        this.get('#/resetPass',handlers.resetPassword);
+        this.get('#/resetPass', handlers.resetPassword);
 
         //CART
 
-        this.get('#/cart',handlers.cart);
+        this.get('#/cart', handlers.cart);
 
         //SHOW EVENTS INFO
 
-        this.get('#/eventsList',handlers.eventsList);
+        this.get('#/eventsList', handlers.eventsList);
         this.get('#/eventDetails/:eventId', handlers.eventDetails);
 
         //SEARCH EVENTS BY CATEGORY
@@ -106,30 +103,30 @@ $(()=>{
 
         //EDIT EVENT
 
-        this.get('#/edit/:eventId',handlers.eventEdit);
-        this.post('#/edit/:eventId',handlers.eventEditAction);
+        this.get('#/edit/:eventId', handlers.eventEdit);
+        this.post('#/edit/:eventId', handlers.eventEditAction);
 
         //deleteEvent by Daniel
-        this.get('#/delete/:eventId',handlers.eventDeleteAction);
+        this.get('#/delete/:eventId', handlers.eventDeleteAction);
 
         //CREATE EVENT
 
-        this.get('#/create',handlers.createEvent);
-        this.post('#/createAction',handlers.createEventAction);
+        this.get('#/create', handlers.createEvent);
+        this.post('#/createAction', handlers.createEventAction);
 
         //call venue list
-        this.get('#/venuesList',handlers.venuesList);
+        this.get('#/venuesList', handlers.venuesList);
 
         //create venue
-        this.get('#/createVenue',handlers.createEvent);
-        this.post('#/createVenue',handlers.createVenueAction);
+        this.get('#/createVenue', handlers.createEvent);
+        this.post('#/createVenue', handlers.createVenueAction);
 
         //edit venue
-        this.get('#/editVenue/:venueId',handlers.editVenue);
-        this.post('#/editVenue/:venueId',handlers.editVenueAction);
+        this.get('#/editVenue/:venueId', handlers.editVenue);
+        this.post('#/editVenue/:venueId', handlers.editVenueAction);
 
         //delete venue
-        this.get('#/deleteVenue/:venueId',handlers.deleteVenue);
+        this.get('#/deleteVenue/:venueId', handlers.deleteVenue);
 
         //CALL NEWS LIST
         this.get('#/news', handlers.newsList);
@@ -138,16 +135,16 @@ $(()=>{
         this.get('#/newsDetails/:newsId', handlers.newsDetails);
 
         //CREATE NEWS
-        this.get('#/createNews',handlers.createNews);
-        this.post('#/createNewsAction',handlers.createNewsAction);
+        this.get('#/createNews', handlers.createNews);
+        this.post('#/createNewsAction', handlers.createNewsAction);
 
         //EDIT NEWS
 
-        this.get('#/editNews/:newsId',handlers.newsEdit);
-        this.post('#/editNewsAction/:newsId',handlers.newsEditAction);
+        this.get('#/editNews/:newsId', handlers.newsEdit);
+        this.post('#/editNewsAction/:newsId', handlers.newsEditAction);
 
         //DELETE NEWS
-        this.get('#/deleteNews/:newsId',handlers.newsDeleteAction);
+        this.get('#/deleteNews/:newsId', handlers.newsDeleteAction);
     });
 
     app.run();
