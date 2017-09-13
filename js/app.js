@@ -128,6 +128,9 @@ $(() => {
         //delete venue
         this.get('#/deleteVenue/:venueId', handlers.deleteVenue);
 
+        //show events for the selected venue
+        this.get('#/venueEvents/:venueId',handlers.eventsForVenue);
+
         //CALL NEWS LIST
         this.get('#/news', handlers.newsList);
 
