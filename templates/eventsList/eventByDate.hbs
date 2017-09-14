@@ -14,14 +14,14 @@
 
         {{else}}
             {{#if isUnlogged}}
-                <p>If you want to buy tickets, have to log in.</p>
+                    <p>Log in to buy tickets.</p>
             {{else}}
-                <h4>Price:</h4>
-
-                <div><input type="number" name="price" required></div>
-                <hr>
-                <button class="w3-button-small w3-red w3-padding-small"><a href="#/buy/:{{_id}}">[Buy]</a></button>
-                <hr>
+                    <h4>Tickets:</h4>
+                    <form action="#/addToCart/:{{_id}}" method="post">
+                        <div><input type="number" name="quantity" id="tickets" required></div>
+                        <br>
+                        <div><input type="submit" class="btn-sm btn-primary" value="Add to cart"></div>
+                    </form>
             {{/if}}
         {{/if}}
 
