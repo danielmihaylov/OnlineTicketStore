@@ -3,10 +3,29 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <section id="viewCart">
-                    <h2><i class="fa fa-shopping-cart"></i> SHOPPING CART</h2>
+                <section id="viewEvents">
+                    <h2><i class="fa fa-shopping-cart"></i> YOUR CART</h2>
                     <hr>
-                    <img src="https://image.jimcdn.com/app/cms/image/transf/none/path/s30a9b12a72c46b90/image/i71e3827874c88424/version/1399896870/image.png">
+
+                    <div id="events">
+                        <table>
+                            <tr>
+                                <th>View more</th>
+                                <th>Event with</th>
+                                <th>Category</th>
+                                <th>Date</th>
+                                <th>Location</th>
+                                <th><i class="fa fa-ticket"></i></th>
+                                <th><i class="fa fa-money"></i></th>
+                                <th>Currency</th>
+                                <th>Action</th>
+                                {{#each eventsInCart}}
+                                    {{>eventInCart}}
+                                {{/each}}
+                            </tr>
+                        </table>
+                        <a href="#/checkout" class="btn btn-success" id="checkout">Checkout</a>
+                    </div>
                 </section>
             </div>
         </div>

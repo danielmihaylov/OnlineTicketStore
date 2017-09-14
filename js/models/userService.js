@@ -12,6 +12,10 @@ let userService = (() => {
         return requester.post('rpc',`${username}/user-password-reset-initiate`,'basic');
     }
 
+    function addToCart(cartItem,userId) {
+        return requester.post('user',`${userId}`,'',)
+    }
+
     return {
         getUser,
         updateUser,

@@ -1765,6 +1765,10 @@ h2.title {
     margin-bottom: 5%;
 }
 
+#checkout{
+    float: right;
+}
+
 #formCreateVenue input, #formEditVenue input, #formCreateEvent input {
     width: 100%;
 }

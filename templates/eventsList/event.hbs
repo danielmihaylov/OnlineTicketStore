@@ -1,5 +1,5 @@
 <tr>
-    <td><button class="w3-button-small w3-green w3-padding-large"><a href="#/eventDetails/:{{_id}}">[Details]</a></button></td>
+    <td><a href="#/eventDetails/:{{_id}}" class="btn btn-primary">Details</a></td>
     <td>{{star}}<br></td>
     <td>{{category}}</td>
     <td>{{date}}</td>
@@ -9,20 +9,24 @@
     <td>
         {{#if isAdmin}}
 
-            <button class="w3-button-small w3-green w3-padding-small"><a href="#/edit/:{{_id}}">[Edit]</a></button>
+            <a href="#/edit/:{{_id}}" class="btn btn-success">Edit</a>
             <hr>
-            <button class="w3-button-small w3-red w3-padding-small"><a href="#/delete/:{{_id}}">[Delete]</a></button>
+            <a href="#/delete/:{{_id}}" class="btn btn-danger">Delete</a>
 
         {{else}}
             {{#if isUnlogged}}
-                <p>If you want to buy tickets, have to log in.</p>
+                <p>Log in to buy tickets.</p>
             {{else}}
-                <h4>Price:</h4>
-
-                <div><input type="number" name="price" required></div>
-                <hr>
-                <button class="w3-button-small w3-red w3-padding-small"><a href="#/buy/:{{_id}}">[Buy]</a></button>
-                <hr>
+                {{#if noTickets}}
+                    <h4 class="alert-danger">SOLD OUT</h4>
+                {{else}}
+                    <h4>Tickets:</h4>
+                    <form action="#/addToCart/:{{_id}}" method="post">
+                        <div><input type="number" name="quantity" id="tickets" required></div>
+                        <br>
+                        <div><input type="submit" class="btn-sm btn-primary" value="Add to cart"></div>
+                    </form>
+                {{/if}}
             {{/if}}
         {{/if}}
 

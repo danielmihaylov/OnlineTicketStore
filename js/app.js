@@ -5,10 +5,10 @@ $(() => {
     let loadingBox = $('#loadingBox');
     $(document).on({
         ajaxStart: function () {
-            loadingBox.show()
+            loadingBox.show();
         },
         ajaxStop: function () {
-            loadingBox.hide();
+            loadingBox.fadeOut();
         }
     });
 
@@ -51,6 +51,12 @@ $(() => {
         //CART
 
         this.get('#/cart', handlers.cart);
+
+        //add selected tickets to cart
+        this.post('#/addToCart/:eventId',handlers.addToCart);
+
+        //remove event from the cart
+        this.get('#/removeItem/:eventId',handlers.removeFromCart);
 
         //SHOW EVENTS INFO
 

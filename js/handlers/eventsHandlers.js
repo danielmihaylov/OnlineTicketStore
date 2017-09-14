@@ -22,6 +22,7 @@ handlers.eventsList = function (ctx) {
                 .then(function (venues) {
 
                     for (let event of ctx.events) {
+                        if (event.tickets==="0") event.noTickets=true;
                         event.venueName = venues.filter(v => v._id === event.venue)[0].name;
                     }
 

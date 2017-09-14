@@ -7,7 +7,8 @@ let auth = (() => {
         sessionStorage.setItem('userId', userId);
         let username = userInfo.username;
         sessionStorage.setItem('username', username);
-
+        let cart = userInfo.cart;
+        sessionStorage.setItem('cart',cart);
         //Not Working
         // sessionStorage.setItem('firstName',userInfo.firstName);
         // sessionStorage.setItem('lastName',userInfo.lastName);
